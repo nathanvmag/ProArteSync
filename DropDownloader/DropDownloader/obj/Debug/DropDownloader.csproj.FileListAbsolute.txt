@@ -22,3 +22,27 @@ C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Debug\Pro Arte Syn
 C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.application
 C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Debug\DropDownloader.Properties.Resources.resources
 C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Debug\DropDownloader.feedback.resources
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\foldericon.ico
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\Pro Arte Sync.exe.config
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\Pro Arte Sync.exe.manifest
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\Pro Arte Sync.application
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\Pro Arte Sync.exe
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\Pro Arte Sync.pdb
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\Dropbox.Api.dll
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\Newtonsoft.Json.dll
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\Dropbox.Api.xml
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\Newtonsoft.Json.xml
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\DropDownloader.csprojAssemblyReference.cache
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\Interop.IWshRuntimeLibrary.dll
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\DropDownloader.csproj.ResolveComReference.cache
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\DropDownloader.feedback.resources
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\DropDownloader.f1.resources
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\DropDownloader.Properties.Resources.resources
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\DropDownloader.Userinfos.resources
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\DropDownloader.csproj.GenerateResource.cache
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\DropDownloader.csproj.CoreCompileInputs.cache
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.exe.manifest
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.application
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\DropDownloader.csproj.CopyComplete
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.exe
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.pdb

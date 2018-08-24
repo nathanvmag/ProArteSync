@@ -30,7 +30,7 @@ namespace DropDownloader
         int syncerrs = 0;
         string syncpath;
         const string site = "http://crm.conteudoproarte.com.br/!/consulta";
-        const string updatesite = "http://localhost/Proarte/";
+        const string updatesite = "http://crm.conteudoproarte.com.br/update/";
         public bool automatic;
         protected string DeviceID;
         public static bool isdownloading, filessync;
@@ -723,7 +723,7 @@ namespace DropDownloader
                         fb.StartPosition = FormStartPosition.CenterScreen;
                         fb.Visible = true;
                         if (System.IO.File.Exists(Path.Combine(System.IO.Path.GetTempPath(), "updateproarte.msi")))System.IO.File.Delete(Path.Combine(System.IO.Path.GetTempPath(), "updateproarte.msi"));
-                       http.DownloadFileAsync(new Uri(updatesite + "Instal Pro Arte Sync.msi"), Path.Combine(System.IO.Path.GetTempPath(), "updateproarte.msi"));
+                       http.DownloadFile(new Uri(updatesite + "Instal Pro Arte Sync.msi"), Path.Combine(System.IO.Path.GetTempPath(), "updateproarte.msi"));
                        fb.Close();
                         Process.Start(Path.Combine(System.IO.Path.GetTempPath(), "updateproarte.msi"));
                         return true;
@@ -772,6 +772,12 @@ namespace DropDownloader
         private void procurarAtualizaçoesDoSistemaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!checkUpdates()) MessageBox.Show("Seu programa esta na versão mais atualizada", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (!checkUpdates()) MessageBox.Show("Seu programa esta na versão mais atualizada", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
 
         public static void CreateShortcut(string shortcutAddress,string target)

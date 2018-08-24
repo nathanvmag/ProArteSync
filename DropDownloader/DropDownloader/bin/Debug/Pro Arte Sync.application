@@ -14,14 +14,14 @@
     <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Pro Arte Sync.exe.manifest" size="6680">
+    <dependentAssembly dependencyType="install" codebase="Pro Arte Sync.exe.manifest" size="6682">
       <assemblyIdentity name="Pro Arte Sync.exe" version="1.0.0.8" publicKeyToken="0000000000000000" language="pt-BR" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>GuPYHixJLppf1XIielhbVG0xGJ1/FMlFWKGuevnmte8=</dsig:DigestValue>
+        <dsig:DigestValue>JyJpLRF8DajLCjIQBz8fr3/VBKHlkKEV47jxXyKlLsM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -4,7 +4,7 @@
   <description asmv2:iconFile="icon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Pro Arte Sync" version="1.0.0.8" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="Pro Arte Sync" version="1.0.0.10" language="neutral" processorArchitecture="msil" />
     <commandLine file="Pro Arte Sync.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -68,13 +68,13 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Pro Arte Sync.exe" size="1350592">
-      <assemblyIdentity name="Pro Arte Sync" version="1.0.0.8" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="Pro Arte Sync" version="1.0.0.10" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>39G86qWqMcy1t8rtP7JByqxgB+N54UDwR6U4ae/EI/k=</dsig:DigestValue>
+        <dsig:DigestValue>9dh52SajLUs6UkN0KVFMtx3CINcD8cBvI3wh+su/Ais=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

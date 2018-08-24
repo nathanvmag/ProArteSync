@@ -44,6 +44,7 @@
             this.receberNotificaçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.procurarAtualizaçoesDoSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fecharToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label4 = new System.Windows.Forms.Label();
@@ -52,7 +53,7 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.procurarAtualizaçoesDoSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -138,7 +139,7 @@
             this.procurarAtualizaçoesDoSistemaToolStripMenuItem,
             this.fecharToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(300, 206);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(300, 178);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // abrirToolStripMenuItem
@@ -181,6 +182,13 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(296, 6);
+            // 
+            // procurarAtualizaçoesDoSistemaToolStripMenuItem
+            // 
+            this.procurarAtualizaçoesDoSistemaToolStripMenuItem.Name = "procurarAtualizaçoesDoSistemaToolStripMenuItem";
+            this.procurarAtualizaçoesDoSistemaToolStripMenuItem.Size = new System.Drawing.Size(299, 24);
+            this.procurarAtualizaçoesDoSistemaToolStripMenuItem.Text = "Procurar Atualizaçoes do Sistema";
+            this.procurarAtualizaçoesDoSistemaToolStripMenuItem.Click += new System.EventHandler(this.procurarAtualizaçoesDoSistemaToolStripMenuItem_Click);
             // 
             // fecharToolStripMenuItem
             // 
@@ -244,12 +252,11 @@
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
             // 
-            // procurarAtualizaçoesDoSistemaToolStripMenuItem
+            // timer2
             // 
-            this.procurarAtualizaçoesDoSistemaToolStripMenuItem.Name = "procurarAtualizaçoesDoSistemaToolStripMenuItem";
-            this.procurarAtualizaçoesDoSistemaToolStripMenuItem.Size = new System.Drawing.Size(299, 24);
-            this.procurarAtualizaçoesDoSistemaToolStripMenuItem.Text = "Procurar Atualizaçoes do Sistema";
-            this.procurarAtualizaçoesDoSistemaToolStripMenuItem.Click += new System.EventHandler(this.procurarAtualizaçoesDoSistemaToolStripMenuItem_Click);
+            this.timer2.Enabled = true;
+            this.timer2.Interval = 14400000;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // f1
             // 
@@ -308,6 +315,7 @@
         private System.Windows.Forms.ToolStripMenuItem definirPreferenciasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem procurarAtualizaçoesDoSistemaToolStripMenuItem;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 
