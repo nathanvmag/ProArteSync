@@ -1,0 +1,23 @@
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Release\Pro Arte Sync.exe.config
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Release\Pro Arte Sync.exe
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Release\Pro Arte Sync.pdb
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Release\Dropbox.Api.dll
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Release\Newtonsoft.Json.dll
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Release\Dropbox.Api.xml
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Release\Newtonsoft.Json.xml
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Release\DropDownloader.f1.resources
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Release\DropDownloader.csproj.GenerateResource.cache
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Release\DropDownloader.csproj.CoreCompileInputs.cache
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Release\DropDownloader.csproj.CopyComplete
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Release\Pro Arte Sync.exe
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Release\Pro Arte Sync.pdb
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Release\DropDownloader.csprojAssemblyReference.cache
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Release\DropDownloader.Userinfos.resources
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Release\foldericon.ico
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Release\Pro Arte Sync.exe.manifest
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Release\Pro Arte Sync.application
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Release\Interop.IWshRuntimeLibrary.dll
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Release\DropDownloader.csproj.ResolveComReference.cache
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Release\ProArteSync.Properties.Resources.resources
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Release\Pro Arte Sync.exe.manifest
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Release\Pro Arte Sync.application

@@ -1,0 +1,24 @@
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Debug\DropDownloader.csprojAssemblyReference.cache
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Debug\DropDownloader.csproj.GenerateResource.cache
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Debug\DropDownloader.csproj.CoreCompileInputs.cache
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Debug\Dropbox.Api.dll
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Debug\Newtonsoft.Json.dll
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Debug\Dropbox.Api.xml
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Debug\Newtonsoft.Json.xml
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Debug\DropDownloader.csproj.CopyComplete
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Debug\DropDownloader.f1.resources
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Debug\Pro Arte Sync.exe.config
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Debug\Pro Arte Sync.exe
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Debug\Pro Arte Sync.pdb
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Debug\DropDownloader.Userinfos.resources
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.exe
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.pdb
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Debug\foldericon.ico
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Debug\DropDownloader.csproj.ResolveComReference.cache
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.exe.manifest
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Debug\Pro Arte Sync.exe.manifest
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\bin\Debug\Pro Arte Sync.application
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.application
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Debug\DropDownloader.Properties.Resources.resources
+C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Debug\DropDownloader.feedback.resources
