@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime;
 using System.Windows.Forms;
 
 namespace DropDownloader
@@ -14,31 +16,51 @@ namespace DropDownloader
         [STAThread]
         static void Main()
         {
-            if (!SingleInstance.Start())
+            try
             {
-                SingleInstance.ShowFirstInstance();
-                return;
-            }
-            if (!first)
-            {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-            }
-           
-                if (!f1.logado&&!first)
-                {   Console.WriteLine("firstEnter");
+             
+                if (!SingleInstance.Start())
+                {
+                    SingleInstance.ShowFirstInstance();
+                    return;
+                }
+                if (!first)
+                {
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                }
+
+                if (!f1.logado && !first)
+                {
+                    Console.WriteLine("firstEnter");
 
                     f1 mainForm = new f1();
                     if (!mainForm.checkUpdates())
-                    Application.Run(mainForm);
+                        Application.Run(mainForm);
                     first = true;
                 }
-    
-            
 
-            SingleInstance.Stop();
+
+
+                SingleInstance.Stop();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Erro=  "+e.ToString());
+                killapp();
+            }
+
         }
-
+        public static void killapp()
+        {
+            try
+            {
+                Process.Start(Application.ExecutablePath);
+                Process.GetCurrentProcess().Kill();
+            }
+            catch
+            { }
+        }
     }
-    }
+}
 

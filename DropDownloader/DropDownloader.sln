@@ -5,20 +5,30 @@ VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropDownloader", "DropDownloader\DropDownloader.csproj", "{E6BFA248-899A-42EB-BD6C-5962D366D0A5}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Instal Pro Art Sync", "Instal Pro Art Sync\Instal Pro Art Sync.vdproj", "{D50CADBE-2724-4644-9FBF-9D6EC9C0F9A2}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Instal Pro Arte Sync", "Instal Pro Art Sync\Instal Pro Art Sync.vdproj", "{D50CADBE-2724-4644-9FBF-9D6EC9C0F9A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{E6BFA248-899A-42EB-BD6C-5962D366D0A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E6BFA248-899A-42EB-BD6C-5962D366D0A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6BFA248-899A-42EB-BD6C-5962D366D0A5}.Debug|x64.ActiveCfg = Debug|x64
+		{E6BFA248-899A-42EB-BD6C-5962D366D0A5}.Debug|x64.Build.0 = Debug|x64
 		{E6BFA248-899A-42EB-BD6C-5962D366D0A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6BFA248-899A-42EB-BD6C-5962D366D0A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6BFA248-899A-42EB-BD6C-5962D366D0A5}.Release|x64.ActiveCfg = Release|x64
+		{E6BFA248-899A-42EB-BD6C-5962D366D0A5}.Release|x64.Build.0 = Release|x64
 		{D50CADBE-2724-4644-9FBF-9D6EC9C0F9A2}.Debug|Any CPU.ActiveCfg = Debug
+		{D50CADBE-2724-4644-9FBF-9D6EC9C0F9A2}.Debug|x64.ActiveCfg = Debug
+		{D50CADBE-2724-4644-9FBF-9D6EC9C0F9A2}.Debug|x64.Build.0 = Debug
 		{D50CADBE-2724-4644-9FBF-9D6EC9C0F9A2}.Release|Any CPU.ActiveCfg = Release
+		{D50CADBE-2724-4644-9FBF-9D6EC9C0F9A2}.Release|x64.ActiveCfg = Release
+		{D50CADBE-2724-4644-9FBF-9D6EC9C0F9A2}.Release|x64.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

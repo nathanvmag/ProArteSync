@@ -120,54 +120,61 @@ namespace DropDownloader
         }
         public static void ListDirectory(TreeView treeView, string path)
         {
-            treeView.Nodes.Clear();
+            try {
+                treeView.Nodes.Clear();
 
-            var stack = new Stack<TreeNode>();
-            var rootDirectory = new DirectoryInfo(path);
-            var node = new TreeNode(rootDirectory.Name) { Tag = rootDirectory };
-            stack.Push(node);
+                var stack = new Stack<TreeNode>();
+                var rootDirectory = new DirectoryInfo(path);
+                var node = new TreeNode(rootDirectory.Name) { Tag = rootDirectory };
+                stack.Push(node);
 
-            while (stack.Count > 0)
-            {
-                var currentNode = stack.Pop();
-                var directoryInfo = (DirectoryInfo)currentNode.Tag;
-                for (int i = 0; i < directoryInfo.GetDirectories().Length; i++)
+                while (stack.Count > 0)
                 {
-
-                    var directory = directoryInfo.GetDirectories()[i];
-                    var childDirectoryNode = new TreeNode(directory.Name) { Tag = directory };
-                    if (i < directoryInfo.GetDirectories().Length - 1)
+                    var currentNode = stack.Pop();
+                    var directoryInfo = (DirectoryInfo)currentNode.Tag;
+                    for (int i = 0; i < directoryInfo.GetDirectories().Length; i++)
                     {
-                        childDirectoryNode.BackColor = Color.LightGreen;
+
+                        var directory = directoryInfo.GetDirectories()[i];
+                        var childDirectoryNode = new TreeNode(directory.Name) { Tag = directory };
+                        if (i < directoryInfo.GetDirectories().Length - 1)
+                        {
+                            childDirectoryNode.BackColor = Color.LightGreen;
+                        }
+                        else childDirectoryNode.BackColor = Color.LightYellow;
+                        if (f1.filessync) childDirectoryNode.BackColor = Color.LightGreen;
+                        currentNode.Nodes.Add(childDirectoryNode);
+                        stack.Push(childDirectoryNode);
                     }
-                    else childDirectoryNode.BackColor = Color.LightYellow;
-                   if (f1.filessync) childDirectoryNode.BackColor = Color.LightGreen;
-                    currentNode.Nodes.Add(childDirectoryNode);
-                    stack.Push(childDirectoryNode);
-                }
-                for (int i = 0; i < directoryInfo.GetFiles().Length; i++)
-                {
-                    
-                    var file = directoryInfo.GetFiles()[i];
-                    if (file.Name == "desktop.ini") continue;
-                    TreeNode tr = new TreeNode(file.Name);
-
-                    if (i<directoryInfo.GetFiles().Length-1)
-                    tr.BackColor = Color.LightGreen ;
-                    else tr.BackColor = Color.LightYellow ;
-                    currentNode.Nodes.Add(tr);
-                    if (f1.filessync) tr.BackColor = Color.LightGreen;
-
-                    if (i==directoryInfo.GetFiles().Length-1)
+                    for (int i = 0; i < directoryInfo.GetFiles().Length; i++)
                     {
-                        if (tr.Parent.BackColor == Color.LightGreen)
+
+                        var file = directoryInfo.GetFiles()[i];
+                        if (file.Name == "desktop.ini") continue;
+                        TreeNode tr = new TreeNode(file.Name);
+
+                        if (i < directoryInfo.GetFiles().Length - 1)
                             tr.BackColor = Color.LightGreen;
-                    }
+                        else tr.BackColor = Color.LightYellow;
+                        currentNode.Nodes.Add(tr);
+                        if (f1.filessync) tr.BackColor = Color.LightGreen;
 
+                        if (i == directoryInfo.GetFiles().Length - 1)
+                        {
+                            if (tr.Parent.BackColor == Color.LightGreen)
+                                tr.BackColor = Color.LightGreen;
+                        }
+
+                    }
                 }
+                node.LastNode.BackColor = Color.LightGreen;
+                treeView.Nodes.Add(node);
             }
-            node.LastNode.BackColor = Color.LightGreen;
-            treeView.Nodes.Add(node);
-        }
+            catch
+            {
+
+            }
+            }
+        
     }
 }

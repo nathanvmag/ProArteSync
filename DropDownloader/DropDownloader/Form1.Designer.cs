@@ -170,6 +170,7 @@
             this.receberNotificaçõesToolStripMenuItem.Size = new System.Drawing.Size(299, 24);
             this.receberNotificaçõesToolStripMenuItem.Text = "Receber Notificações";
             this.receberNotificaçõesToolStripMenuItem.CheckedChanged += new System.EventHandler(this.receberNotificaçõesToolStripMenuItem_CheckedChanged);
+            this.receberNotificaçõesToolStripMenuItem.Click += new System.EventHandler(this.receberNotificaçõesToolStripMenuItem_Click);
             // 
             // sairToolStripMenuItem
             // 
@@ -277,9 +278,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "f1";
             this.Text = "Pro Arte Sync";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.f1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.VisibleChanged += new System.EventHandler(this.f1_VisibleChanged);

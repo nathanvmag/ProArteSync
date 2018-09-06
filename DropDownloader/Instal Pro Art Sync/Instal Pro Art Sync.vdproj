@@ -112,10 +112,10 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5.2"
                     {
-                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
-                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    "Name" = "8:Microsoft .NET Framework 4.5.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5.2"
                     }
                 }
             }
@@ -380,24 +380,24 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Pro Arte Sync"
-        "ProductCode" = "8:{462B5356-0155-4FB5-B324-CD2E6D913AA3}"
-        "PackageCode" = "8:{0D6A01B7-DE7F-4032-8E22-C49D76D22970}"
+        "ProductCode" = "8:{90550239-54D1-4CBC-9109-1D90DED95887}"
+        "PackageCode" = "8:{3C7C3951-EB58-40C1-B057-764E10B10A5F}"
         "UpgradeCode" = "8:{952A42BB-BCAC-4631-A462-F548F8D206DF}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
-        "DetectNewerInstalledVersion" = "11:TRUE"
-        "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.9"
-        "Manufacturer" = "8:Pro Arte Sync"
-        "ARPHELPTELEPHONE" = "8:"
-        "ARPHELPLINK" = "8:"
+        "DetectNewerInstalledVersion" = "11:FALSE"
+        "InstallAllUsers" = "11:TRUE"
+        "ProductVersion" = "8:1.0.19"
+        "Manufacturer" = "8:ComunicPlus"
+        "ARPHELPTELEPHONE" = "8:contato@comunicplus.com"
+        "ARPHELPLINK" = "8:comunicplus.com"
         "Title" = "8:Pro Art Sync"
-        "Subject" = "8:"
-        "ARPCONTACT" = "8:Nathan Magalhães"
+        "Subject" = "8:Baixar arquivos pro arte sync"
+        "ARPCONTACT" = "8:ComunicPlus"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:Instalador do Pro Arte Sync"
-        "ARPURLINFOABOUT" = "8:"
+        "ARPURLINFOABOUT" = "8:comunicplus.com"
         "ARPPRODUCTICON" = "8:_69636A499F864CE085985DBE67077B72"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
@@ -930,7 +930,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
             {
-            "SourcePath" = "8:..\\DropDownloader\\obj\\Debug\\Pro Arte Sync.exe"
+            "SourcePath" = "8:..\\DropDownloader\\obj\\Release\\Pro Arte Sync.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_D70C8B2E2B4E4C95B6FE6EBF6149D4B7"

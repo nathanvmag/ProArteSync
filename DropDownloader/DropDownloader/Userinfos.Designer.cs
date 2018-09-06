@@ -42,6 +42,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.statuslb = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,14 +91,14 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(226, 211);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(155, 20);
+            this.label2.Size = new System.Drawing.Size(165, 20);
             this.label2.TabIndex = 19;
-            this.label2.Text = "Status de download";
+            this.label2.Text = "Status de download :";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(805, 499);
+            this.button1.Location = new System.Drawing.Point(689, 286);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(101, 23);
             this.button1.TabIndex = 20;
@@ -117,7 +118,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(647, 499);
+            this.button4.Location = new System.Drawing.Point(531, 286);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(152, 23);
             this.button4.TabIndex = 22;
@@ -143,16 +144,28 @@
             // 
             // treeView1
             // 
-            this.treeView1.Location = new System.Drawing.Point(75, 234);
+            this.treeView1.Location = new System.Drawing.Point(163, 286);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(519, 270);
+            this.treeView1.Size = new System.Drawing.Size(215, 164);
             this.treeView1.TabIndex = 23;
+            this.treeView1.Visible = false;
+            // 
+            // statuslb
+            // 
+            this.statuslb.AutoSize = true;
+            this.statuslb.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statuslb.Location = new System.Drawing.Point(158, 248);
+            this.statuslb.Name = "statuslb";
+            this.statuslb.Size = new System.Drawing.Size(275, 25);
+            this.statuslb.TabIndex = 24;
+            this.statuslb.Text = "Todos Arquivos sincronizados";
             // 
             // Userinfos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(918, 534);
+            this.ClientSize = new System.Drawing.Size(880, 324);
+            this.Controls.Add(this.statuslb);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -192,5 +205,6 @@
         public System.Windows.Forms.Button button4;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.Label statuslb;
     }
 }
