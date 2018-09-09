@@ -39,27 +39,24 @@ namespace DropDownloader
                         Application.Run(mainForm);
                     first = true;
                 }
-
-
-
                 SingleInstance.Stop();
             }
             catch (Exception e)
             {
-                Console.WriteLine("Erro=  "+e.ToString());
-                killapp();
+                MessageBox.Show("Erro=  "+e.ToString());
+                //killapp();
             }
 
         }
         public static void killapp()
-        {
+        {/*
             try
             {
                 Process.Start(Application.ExecutablePath);
                 Process.GetCurrentProcess().Kill();
             }
             catch
-            { }
+            { }*/
         }
     }
 }

@@ -376,20 +376,20 @@ namespace DropDownloader
                 
                     notifyIcon1.BalloonTipTitle = this.Text;
                     if (checkBox1.Checked) notifyIcon1.ShowBalloonTip(1000);
-                    JObject jobject = null;
-                
+                    JObject jobject = null;              
                 
                     syncpath = Properties.Settings.Default.Folder;
                     string resu = MakeLogin(textBox1.Text, textBox2.Text);
                     jobject = JObject.Parse(resu);
-                    JArray controle = (JArray)jobject["controle"];
-                    for (int z = 0; z < controle.Count; z++)
+                   // JArray controle = (JArray)jobject["controle"];
+                    /*for (int z = 0; z < controle.Count; z++)
                     {
                         if (!PastaNames.Contains(controle[z].ToString()))
                             PastaNames.Add(controle[z].ToString());
                     }
                     foreach (string s in PastaNames)
                         Console.WriteLine("Nome de pasta " + s);
+                        */
                     if ((bool)jobject["sucesso"] == true)
                     {
                         if (this.Visible) this.Hide();
@@ -408,8 +408,8 @@ namespace DropDownloader
                             {
                                 DateTime now = DateTime.Now;
                                 lista[i]["origem"] = "/" + lista[i]["origem"].ToString().Replace("%dia%", now.Day > 9 ? now.Day.ToString() : "0" + now.Day).Replace("%mes%", now.Month > 9 ? now.Month.ToString() : "0" + now.Month).Replace("%ano%", now.Year.ToString());
-                                Console.WriteLine("MEU CAMINHO "+lista[i]["origem"]);
-                                Metadata data =  await dbx.Files.GetMetadataAsync(lista[i]["origem"].ToString());
+                                Console.WriteLine("MEU CAMINHO " + lista[i]["origem"]);
+                                Metadata data = await dbx.Files.GetMetadataAsync(lista[i]["origem"].ToString());
                                 Console.WriteLine
                                 (data.AsFile.Size);
                                 Console.WriteLine(data.Name + " " + data.PathDisplay);
@@ -421,10 +421,10 @@ namespace DropDownloader
 
                                 }
                                 string where = lista[i]["destino"].ToString();
-                                destpath = destpath.Replace("_%dia%-%mes%-%ano%","");
+                                destpath = destpath.Replace("_%dia%-%mes%-%ano%", "");
                                 if (System.IO.File.Exists(destpath))
                                 {
-                                    DateTime lastwrite= System.IO.File.GetLastWriteTime(destpath);
+                                    DateTime lastwrite = System.IO.File.GetLastWriteTime(destpath);
                                     if (lastwrite.Date != now.Date)
                                     {
                                         System.IO.File.Delete(destpath);
@@ -442,44 +442,46 @@ namespace DropDownloader
                                     }
 
                                 }
-                                var tokenSource2 = new CancellationTokenSource();
-                                CancellationToken ct = tokenSource2.Token;
-                                                            
-                               
+
                                 isdownloading = true;
-                                var file =  dbx.Files.DownloadAsync(lista[i]["origem"].ToString()).Result;
-                                var files =await file.GetContentAsStreamAsync();
-                                string secondary = destpath.Replace("/" + destpath.Split('/')[destpath.Split('/').Length - 1], "");
-                                Console.WriteLine("novo path" + secondary);
-                                if (!System.IO.Directory.Exists(destpath))
+                                using (var file = dbx.Files.DownloadAsync(lista[i]["origem"].ToString()).Result)
                                 {
-                                    Console.WriteLine("path de destino "+destpath+ " secondario "+secondary);
-                                    System.IO.Directory.CreateDirectory(secondary);
-                                }
-                                using (FileStream fileStream = System.IO.File.Create(destpath))
-                                {
-                                    files.CopyTo(fileStream);
-                                    Console.WriteLine("download concluido "+ fileStream.Length+"  "+data.AsFile.Size);
-                                    if((ulong)fileStream.Length!=data.AsFile.Size)
+                                    using (var files = await file.GetContentAsStreamAsync())
                                     {
-                                        i--;
-                                        Console.WriteLine("Replay");
-                                        continue;
+
+                                        string secondary = destpath.Replace("/" + destpath.Split('/')[destpath.Split('/').Length - 1], "");
+                                        Console.WriteLine("novo path" + secondary);
+                                        if (!System.IO.Directory.Exists(destpath))
+                                        {
+                                            Console.WriteLine("path de destino " + destpath + " secondario " + secondary);
+                                            System.IO.Directory.CreateDirectory(secondary);
+                                        }
+                                        using (FileStream fileStream = System.IO.File.Create(destpath))
+                                        {
+                                            files.CopyTo(fileStream);
+                                            Console.WriteLine("download concluido " + fileStream.Length + "  " + data.AsFile.Size);
+                                            if ((ulong)fileStream.Length != data.AsFile.Size)
+                                            {
+                                                i--;
+                                                Console.WriteLine("Replay");
+                                                continue;
+                                            }
+                                            Console.WriteLine("total memory antes" + GC.GetTotalMemory(true));
+
+                                            files.Close();
+                                            fileStream.Close();
+                                            file.Dispose();
+                                            files.Dispose();
+                                            fileStream.Dispose();
+
+                                        }
+                                        notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Procurando.GetHicon());
+                                        isdownloading = false;
+                                        Console.WriteLine("total memory dps" + GC.GetTotalMemory(true));
+
+
                                     }
-                                    Console.WriteLine("total memory antes" + GC.GetTotalMemory(true));
-
-                                    files.Close();
-                                    fileStream.Close();
-                                    file.Dispose();
-                                    files.Dispose();
-                                    fileStream.Dispose();
-
                                 }
-                                notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Procurando.GetHicon());
-                                isdownloading = false;
-                                Console.WriteLine("total memory dps"+GC.GetTotalMemory(true));
-
-
                             }
                             catch (Exception ex)
                             {
@@ -487,6 +489,9 @@ namespace DropDownloader
                                 Console.WriteLine("error " + ex.ToString());
                             }
                             GC.Collect();
+                            GC.WaitForPendingFinalizers();
+                            GC.Collect();
+                            GC.WaitForPendingFinalizers();
                         }
                         JArray pastas = (JArray)jobject["pastas"];
                         for(int i=0;i<pastas.Count;i++)
@@ -536,28 +541,35 @@ namespace DropDownloader
                                         }
 
                                     }
-                                    var file = dbx.Files.DownloadAsync(pastas[i]["origem"].ToString() + item.Name).Result;
-                                    var files = await file.GetContentAsStreamAsync();
-                                    using (FileStream fileStream = System.IO.File.Create(destpath))
+                                    using (var file = dbx.Files.DownloadAsync(lista[i]["origem"].ToString()).Result)
                                     {
-                                        files.CopyTo(fileStream);
-                                        Console.WriteLine("download concluido " + fileStream.Length + "  " + data.AsFile.Size);
-                                        if ((ulong)fileStream.Length != data.AsFile.Size)
+                                        using (var files = await file.GetContentAsStreamAsync())
                                         {
-                                            i--;
-                                            Console.WriteLine("Replay");
-                                            continue;
-                                        }
-                                        files.Close();
-                                        fileStream.Close();
-                                        file.Dispose();
-                                        files.Dispose();
-                                        fileStream.Dispose();
-                                    }
-                                    notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Procurando.GetHicon());
-                                    isdownloading = false;
-                                  
+                                            using (FileStream fileStream = System.IO.File.Create(destpath))
+                                            {
+                                                files.CopyTo(fileStream);
+                                                Console.WriteLine("download concluido " + fileStream.Length + "  " + data.AsFile.Size);
+                                                if ((ulong)fileStream.Length != data.AsFile.Size)
+                                                {
+                                                    i--;
+                                                    Console.WriteLine("Replay");
+                                                    continue;
+                                                }
+                                                files.Close();
+                                                fileStream.Close();
+                                                file.Dispose();
+                                                files.Dispose();
+                                                fileStream.Dispose();
+                                            }
+                                            notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Procurando.GetHicon());
+                                            isdownloading = false;
+                                            GC.Collect();
+                                            GC.WaitForPendingFinalizers();
+                                            GC.Collect();
+                                            GC.WaitForPendingFinalizers();
 
+                                        }
+                                    }
                                 }
                                 foreach (var item in list.Entries.Where(z => z.IsFolder))
                                 {
@@ -622,7 +634,7 @@ namespace DropDownloader
                
                 filessync = true;
                 notifyIcon1.Text = "Arquivos sincronizados Desde " + DateTime.Now;
-               if(updatecount>8)
+               if(updatecount>25)
                 {
                     Program.killapp();
                 }
@@ -914,6 +926,16 @@ namespace DropDownloader
                 st.Write(JsonConvert.SerializeObject(opts));
                 st.Close();
             }
+        }
+
+        private void definirPreferenciasNovoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pastaspref pf = new pastaspref(PastaNames)
+            { StartPosition = FormStartPosition.CenterScreen, Visible = true
+
+            };
+            
+
         }
 
         public static void CreateShortcut(string shortcutAddress,string target)

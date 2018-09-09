@@ -15,7 +15,11 @@ namespace DropDownloader
         public pastaspref(List<string> pastas)
         {
             InitializeComponent();
-            
+           
+
+
+
+
         }
     }
 }

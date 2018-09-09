@@ -1,0 +1,26 @@
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\bin\x86\Debug\Pro Arte Sync.exe.config
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\obj\x86\Debug\Interop.IWshRuntimeLibrary.dll
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\obj\x86\Debug\DropDownloader.csproj.ResolveComReference.cache
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\bin\x86\Debug\foldericon.ico
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\bin\x86\Debug\Pro Arte Sync.exe.manifest
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\bin\x86\Debug\Pro Arte Sync.application
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\bin\x86\Debug\Pro Arte Sync.exe
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\bin\x86\Debug\Pro Arte Sync.pdb
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\bin\x86\Debug\Pro Arte Sync.exe.CodeAnalysisLog.xml
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\bin\x86\Debug\Pro Arte Sync.exe.lastcodeanalysissucceeded
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\bin\x86\Debug\Dropbox.Api.dll
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\bin\x86\Debug\Newtonsoft.Json.dll
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\bin\x86\Debug\Dropbox.Api.xml
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\bin\x86\Debug\Newtonsoft.Json.xml
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\obj\x86\Debug\DropDownloader.feedback.resources
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\obj\x86\Debug\DropDownloader.f1.resources
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\obj\x86\Debug\DropDownloader.pastaspref.resources
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\obj\x86\Debug\DropDownloader.Properties.Resources.resources
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\obj\x86\Debug\DropDownloader.Userinfos.resources
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\obj\x86\Debug\DropDownloader.csproj.GenerateResource.Cache
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\obj\x86\Debug\Pro Arte Sync.TrustInfo.xml
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\obj\x86\Debug\Pro Arte Sync.exe.manifest
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\obj\x86\Debug\Pro Arte Sync.application
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\obj\x86\Debug\Pro Arte Sync.exe
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\obj\x86\Debug\Pro Arte Sync.pdb
+Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\obj\x86\Debug\DropDownloader.csprojResolveAssemblyReference.cache

@@ -207,11 +207,6 @@
             "AssemblyAsmDisplayName" = "8:Dropbox.Api, Version=4.0.0.0, Culture=neutral, PublicKeyToken=310f0e82fbb45d01, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_5E1AB203D04497DB0043099669A9A02A"
-                    {
-                    "Name" = "8:Dropbox.Api.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Dropbox.Api.dll"
             "TargetName" = "8:"
@@ -238,11 +233,6 @@
             "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_5E8AED666EB4C084AD9800F4E58E1143"
-                    {
-                    "Name" = "8:Newtonsoft.Json.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Newtonsoft.Json.dll"
             "TargetName" = "8:"
@@ -289,11 +279,6 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_E9D7D11998CEF0267F4A7133CAEB646F"
-                    {
-                    "Name" = "8:System.Net.Http.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -380,15 +365,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Pro Arte Sync"
-        "ProductCode" = "8:{90550239-54D1-4CBC-9109-1D90DED95887}"
-        "PackageCode" = "8:{3C7C3951-EB58-40C1-B057-764E10B10A5F}"
+        "ProductCode" = "8:{604E52F5-6C7C-470C-9CA1-B5DE14490664}"
+        "PackageCode" = "8:{ED567336-0BFB-4715-8EB3-4D6CE49035CD}"
         "UpgradeCode" = "8:{952A42BB-BCAC-4631-A462-F548F8D206DF}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.19"
+        "ProductVersion" = "8:1.0.21"
         "Manufacturer" = "8:ComunicPlus"
         "ARPHELPTELEPHONE" = "8:contato@comunicplus.com"
         "ARPHELPLINK" = "8:comunicplus.com"
@@ -930,7 +915,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
             {
-            "SourcePath" = "8:..\\DropDownloader\\obj\\Release\\Pro Arte Sync.exe"
+            "SourcePath" = "8:..\\DropDownloader\\obj\\Debug\\Pro Arte Sync.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_D70C8B2E2B4E4C95B6FE6EBF6149D4B7"
