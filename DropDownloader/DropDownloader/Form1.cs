@@ -245,7 +245,6 @@ namespace DropDownloader
                             notifyIcon1.Visible = true;
                             notifyIcon1.Text = "Pro Arte Sync";
                             logado = true;
-                           // updater.RunWorkerAsync();
 
                         }
                         else
@@ -359,168 +358,71 @@ namespace DropDownloader
 
          async void UpdateFilesAsync(object sender, EventArgs e)
         {
-            if (this.Visible) this.Hide();
-            if(dbx==null)
+            try
             {
-                login();
-            }
-            if (logado)
-            {
-                if (dbx == null) return;
-                updatecount++;
-                try
+                if (this.Visible) this.Hide();
+                if (dbx == null)
                 {
-                    filessync = false;
-                   notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-                   notifyIcon1.BalloonTipText = "Atualizando arquivos...";
-                
-                    notifyIcon1.BalloonTipTitle = this.Text;
-                    if (checkBox1.Checked) notifyIcon1.ShowBalloonTip(1000);
-                    JObject jobject = null;              
-                
-                    syncpath = Properties.Settings.Default.Folder;
-                    string resu = MakeLogin(textBox1.Text, textBox2.Text);
-                    jobject = JObject.Parse(resu);
-                   // JArray controle = (JArray)jobject["controle"];
-                    /*for (int z = 0; z < controle.Count; z++)
+                    login();
+                }
+                if (logado)
+                {
+                    if (dbx == null) return;
+                    updatecount++;
+                    try
                     {
-                        if (!PastaNames.Contains(controle[z].ToString()))
-                            PastaNames.Add(controle[z].ToString());
-                    }
-                    foreach (string s in PastaNames)
-                        Console.WriteLine("Nome de pasta " + s);
-                        */
-                    if ((bool)jobject["sucesso"] == true)
-                    {
-                        if (this.Visible) this.Hide();
-                        syncerrs = 0;
-                        Properties.Settings.Default.acesso = jobject["acesso"].ToString();
-                        Properties.Settings.Default.Save();
-                        Properties.Settings.Default.Reload();
-                        Console.WriteLine("Acesso " + jobject["acesso"]);
-                        JArray lista = (JArray)jobject["lista"];
-                        for (int i = 0; i < lista.Count; i++)
+                        filessync = false;
+                        notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+                        notifyIcon1.BalloonTipText = "Atualizando arquivos...";
+
+                        notifyIcon1.BalloonTipTitle = this.Text;
+                        if (checkBox1.Checked) notifyIcon1.ShowBalloonTip(1000);
+                        JObject jobject = null;
+
+                        syncpath = Properties.Settings.Default.Folder;
+                        string resu = MakeLogin(textBox1.Text, textBox2.Text);
+                        jobject = JObject.Parse(resu);
+                        // JArray controle = (JArray)jobject["controle"];
+                        /*for (int z = 0; z < controle.Count; z++)
                         {
-                            notifyIcon1.Text = "Atualizando arquivos " + (i + 1) + "/" + lista.Count;
-
-                            if (!logado) break;
-                            try
-                            {
-                                DateTime now = DateTime.Now;
-                                lista[i]["origem"] = "/" + lista[i]["origem"].ToString().Replace("%dia%", now.Day > 9 ? now.Day.ToString() : "0" + now.Day).Replace("%mes%", now.Month > 9 ? now.Month.ToString() : "0" + now.Month).Replace("%ano%", now.Year.ToString());
-                                Console.WriteLine("MEU CAMINHO " + lista[i]["origem"]);
-                                Metadata data = await dbx.Files.GetMetadataAsync(lista[i]["origem"].ToString());
-                                Console.WriteLine
-                                (data.AsFile.Size);
-                                Console.WriteLine(data.Name + " " + data.PathDisplay);
-                                string destpath = Path.Combine(syncpath, lista[i]["destino"].ToString());
-                                if (lista[i]["excluir"] != null)
-                                {
-                                    string toRemove = Path.Combine(syncpath, lista[i]["excluir"].ToString());
-                                    if (System.IO.File.Exists(toRemove)) System.IO.File.Delete(toRemove);
-
-                                }
-                                string where = lista[i]["destino"].ToString();
-                                destpath = destpath.Replace("_%dia%-%mes%-%ano%", "");
-                                if (System.IO.File.Exists(destpath))
-                                {
-                                    DateTime lastwrite = System.IO.File.GetLastWriteTime(destpath);
-                                    if (lastwrite.Date != now.Date)
-                                    {
-                                        System.IO.File.Delete(destpath);
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine(new FileInfo(destpath).Length + "   " + data.AsFile.Size);
-                                        if (((ulong)new FileInfo(destpath).Length == data.AsFile.Size))
-                                        {
-                                            Console.WriteLine("É de hoje");
-                                            continue;
-                                        }
-                                        else System.IO.File.Delete(destpath);
-
-                                    }
-
-                                }
-
-                                isdownloading = true;
-                                using (var file = dbx.Files.DownloadAsync(lista[i]["origem"].ToString()).Result)
-                                {
-                                    using (var files = await file.GetContentAsStreamAsync())
-                                    {
-
-                                        string secondary = destpath.Replace("/" + destpath.Split('/')[destpath.Split('/').Length - 1], "");
-                                        Console.WriteLine("novo path" + secondary);
-                                        if (!System.IO.Directory.Exists(destpath))
-                                        {
-                                            Console.WriteLine("path de destino " + destpath + " secondario " + secondary);
-                                            System.IO.Directory.CreateDirectory(secondary);
-                                        }
-                                        using (FileStream fileStream = System.IO.File.Create(destpath))
-                                        {
-                                            files.CopyTo(fileStream);
-                                            Console.WriteLine("download concluido " + fileStream.Length + "  " + data.AsFile.Size);
-                                            if ((ulong)fileStream.Length != data.AsFile.Size)
-                                            {
-                                                i--;
-                                                Console.WriteLine("Replay");
-                                                continue;
-                                            }
-                                            Console.WriteLine("total memory antes" + GC.GetTotalMemory(true));
-
-                                            files.Close();
-                                            fileStream.Close();
-                                            file.Dispose();
-                                            files.Dispose();
-                                            fileStream.Dispose();
-
-                                        }
-                                        notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Procurando.GetHicon());
-                                        isdownloading = false;
-                                        Console.WriteLine("total memory dps" + GC.GetTotalMemory(true));
-
-
-                                    }
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-
-                                Console.WriteLine("error " + ex.ToString());
-                            }
-                            GC.Collect();
-                            GC.WaitForPendingFinalizers();
-                            GC.Collect();
-                            GC.WaitForPendingFinalizers();
+                            if (!PastaNames.Contains(controle[z].ToString()))
+                                PastaNames.Add(controle[z].ToString());
                         }
-                        JArray pastas = (JArray)jobject["pastas"];
-                        for(int i=0;i<pastas.Count;i++)
+                        foreach (string s in PastaNames)
+                            Console.WriteLine("Nome de pasta " + s);
+                            */
+                        if ((bool)jobject["sucesso"] == true)
                         {
-                            if (!logado) break;
-
-                            try
+                            if (this.Visible) this.Hide();
+                            syncerrs = 0;
+                            Properties.Settings.Default.acesso = jobject["acesso"].ToString();
+                            Properties.Settings.Default.Save();
+                            Properties.Settings.Default.Reload();
+                            Console.WriteLine("Acesso " + jobject["acesso"]);
+                            JArray lista = (JArray)jobject["lista"];
+                            for (int i = 0; i < lista.Count; i++)
                             {
-                                isdownloading = true;
-                                string oldOrigem = pastas[i]["origem"].ToString();
-                                notifyIcon1.Text = "Baixando pastas de arquivos " + oldOrigem.Split('/')[oldOrigem.Split('/').Length - 1];
-                                pastas[i]["origem"] = "/" + pastas[i]["origem"];
-                                var list = await dbx.Files.ListFolderAsync(pastas[i]["origem"].ToString());
-                                string destpath = Path.Combine(syncpath, pastas[i]["destino"].ToString());
+                                notifyIcon1.Text = "Atualizando arquivos " + (i + 1) + "/" + lista.Count;
 
-                                if (!Directory.Exists(destpath)) Directory.CreateDirectory(destpath);
-                                // show folders then files
-
-
-                                foreach (var item in list.Entries.Where(z => z.IsFile))
+                                if (!logado) break;
+                                try
                                 {
-                                    Console.WriteLine("F{0,8} {1}", item.AsFile.Size, item.Name);
-                                    Console.WriteLine("meta data de " + pastas[i]["origem"].ToString() + item.Name);
-                                    destpath = Path.Combine(syncpath, pastas[i]["destino"].ToString());
-                                    Metadata data = await dbx.Files.GetMetadataAsync(pastas[i]["origem"].ToString() + item.Name);
-
-                                    destpath += item.Name;
-                                    Console.WriteLine("destpath " + destpath);
                                     DateTime now = DateTime.Now;
+                                    lista[i]["origem"] = "/" + lista[i]["origem"].ToString().Replace("%dia%", now.Day > 9 ? now.Day.ToString() : "0" + now.Day).Replace("%mes%", now.Month > 9 ? now.Month.ToString() : "0" + now.Month).Replace("%ano%", now.Year.ToString());
+                                    Console.WriteLine("MEU CAMINHO " + lista[i]["origem"]);
+                                    Metadata data = await dbx.Files.GetMetadataAsync(lista[i]["origem"].ToString());
+                                    Console.WriteLine
+                                    (data.AsFile.Size);
+                                    Console.WriteLine(data.Name + " " + data.PathDisplay);
+                                    string destpath = Path.Combine(syncpath, lista[i]["destino"].ToString());
+                                    if (lista[i]["excluir"] != null)
+                                    {
+                                        string toRemove = Path.Combine(syncpath, lista[i]["excluir"].ToString());
+                                        if (System.IO.File.Exists(toRemove)) System.IO.File.Delete(toRemove);
+
+                                    }
+                                    string where = lista[i]["destino"].ToString();
+                                    destpath = destpath.Replace("_%dia%-%mes%-%ano%", "");
                                     if (System.IO.File.Exists(destpath))
                                     {
                                         DateTime lastwrite = System.IO.File.GetLastWriteTime(destpath);
@@ -541,10 +443,20 @@ namespace DropDownloader
                                         }
 
                                     }
+
+                                    isdownloading = true;
                                     using (var file = dbx.Files.DownloadAsync(lista[i]["origem"].ToString()).Result)
                                     {
                                         using (var files = await file.GetContentAsStreamAsync())
                                         {
+
+                                            string secondary = destpath.Replace("/" + destpath.Split('/')[destpath.Split('/').Length - 1], "");
+                                            Console.WriteLine("novo path" + secondary);
+                                            if (!System.IO.Directory.Exists(destpath))
+                                            {
+                                                Console.WriteLine("path de destino " + destpath + " secondario " + secondary);
+                                                System.IO.Directory.CreateDirectory(secondary);
+                                            }
                                             using (FileStream fileStream = System.IO.File.Create(destpath))
                                             {
                                                 files.CopyTo(fileStream);
@@ -555,95 +467,185 @@ namespace DropDownloader
                                                     Console.WriteLine("Replay");
                                                     continue;
                                                 }
+                                                Console.WriteLine("total memory antes" + GC.GetTotalMemory(true));
+
                                                 files.Close();
                                                 fileStream.Close();
                                                 file.Dispose();
                                                 files.Dispose();
                                                 fileStream.Dispose();
+
                                             }
                                             notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Procurando.GetHicon());
                                             isdownloading = false;
-                                            GC.Collect();
-                                            GC.WaitForPendingFinalizers();
-                                            GC.Collect();
-                                            GC.WaitForPendingFinalizers();
+                                            Console.WriteLine("total memory dps" + GC.GetTotalMemory(true));
+
 
                                         }
                                     }
                                 }
-                                foreach (var item in list.Entries.Where(z => z.IsFolder))
+                                catch (Exception ex)
                                 {
-                                    Console.WriteLine("D  {0}/", item.Name);
-                                    JToken jt = JObject.Parse(pastas[i].ToString());                                    
 
-                                    jt["origem"] = oldOrigem + item.Name + "/";
-                                    jt["destino"] += item.Name + "/";
-                                    Console.WriteLine(jt);
-
-                                    pastas.Add(jt);
+                                    Console.WriteLine("error " + ex.ToString());
                                 }
+                                GC.Collect();
+                                GC.WaitForPendingFinalizers();
+                                GC.Collect();
+                                GC.WaitForPendingFinalizers();
+                            }
+                            JArray pastas = (JArray)jobject["pastas"];
+                            for (int i = 0; i < pastas.Count; i++)
+                            {
+                                if (!logado) break;
+
+                                try
+                                {
+                                    isdownloading = true;
+                                    string oldOrigem = pastas[i]["origem"].ToString();
+                                    notifyIcon1.Text = "Baixando pastas de arquivos " + oldOrigem.Split('/')[oldOrigem.Split('/').Length - 1];
+                                    pastas[i]["origem"] = "/" + pastas[i]["origem"];
+                                    var list = await dbx.Files.ListFolderAsync(pastas[i]["origem"].ToString());
+                                    string destpath = Path.Combine(syncpath, pastas[i]["destino"].ToString());
+
+                                    if (!Directory.Exists(destpath)) Directory.CreateDirectory(destpath);
+                                    // show folders then files
+
+
+                                    foreach (var item in list.Entries.Where(z => z.IsFile))
+                                    {
+                                        Console.WriteLine("F{0,8} {1}", item.AsFile.Size, item.Name);
+                                        Console.WriteLine("meta data de " + pastas[i]["origem"].ToString() + item.Name);
+                                        destpath = Path.Combine(syncpath, pastas[i]["destino"].ToString());
+                                        Metadata data = await dbx.Files.GetMetadataAsync(pastas[i]["origem"].ToString() + item.Name);
+
+                                        destpath += item.Name;
+                                        Console.WriteLine("destpath " + destpath);
+                                        DateTime now = DateTime.Now;
+                                        if (System.IO.File.Exists(destpath))
+                                        {
+                                            DateTime lastwrite = System.IO.File.GetLastWriteTime(destpath);
+                                            if (lastwrite.Date != now.Date)
+                                            {
+                                                System.IO.File.Delete(destpath);
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine(new FileInfo(destpath).Length + "   " + data.AsFile.Size);
+                                                if (((ulong)new FileInfo(destpath).Length == data.AsFile.Size))
+                                                {
+                                                    Console.WriteLine("É de hoje");
+                                                    continue;
+                                                }
+                                                else System.IO.File.Delete(destpath);
+
+                                            }
+
+                                        }
+                                        using (var file = dbx.Files.DownloadAsync(lista[i]["origem"].ToString()).Result)
+                                        {
+                                            using (var files = await file.GetContentAsStreamAsync())
+                                            {
+                                                using (FileStream fileStream = System.IO.File.Create(destpath))
+                                                {
+                                                    files.CopyTo(fileStream);
+                                                    Console.WriteLine("download concluido " + fileStream.Length + "  " + data.AsFile.Size);
+                                                    if ((ulong)fileStream.Length != data.AsFile.Size)
+                                                    {
+                                                        i--;
+                                                        Console.WriteLine("Replay");
+                                                        continue;
+                                                    }
+                                                    files.Close();
+                                                    fileStream.Close();
+                                                    file.Dispose();
+                                                    files.Dispose();
+                                                    fileStream.Dispose();
+                                                }
+                                                notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Procurando.GetHicon());
+                                                isdownloading = false;
+                                                GC.Collect();
+                                                GC.WaitForPendingFinalizers();
+                                                GC.Collect();
+                                                GC.WaitForPendingFinalizers();
+
+                                            }
+                                        }
+                                    }
+                                    foreach (var item in list.Entries.Where(z => z.IsFolder))
+                                    {
+                                        Console.WriteLine("D  {0}/", item.Name);
+                                        JToken jt = JObject.Parse(pastas[i].ToString());
+
+                                        jt["origem"] = oldOrigem + item.Name + "/";
+                                        jt["destino"] += item.Name + "/";
+                                        Console.WriteLine(jt);
+
+                                        pastas.Add(jt);
+                                    }
+                                }
+                                catch
+                                {
+
+                                }
+
+                                GC.Collect();
+                                GC.WaitForPendingFinalizers();
+                                GC.Collect();
+                                GC.WaitForPendingFinalizers();
+                            }
+
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nao logado");
+                            logado = false;
+                            try
+                            {
+                                MessageBox.Show("Erro de conexão: " + jobject["mensagem"]["mensagem"].ToString(), jobject["mensagem"]["titulo"].ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                             catch
                             {
+                                MessageBox.Show("Sem Conexão com a internet Tente novamente", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                             }
-                           
-                            GC.Collect();
-                            GC.WaitForPendingFinalizers();
-                            GC.Collect();
-                            GC.WaitForPendingFinalizers();
                         }
-                       
-
-                    }
-                    else
-                    {
-                        Console.WriteLine("Nao logado");
-                        logado = false;
-                        try
-                        {
-                            MessageBox.Show("Erro de conexão: " + jobject["mensagem"]["mensagem"].ToString(), jobject["mensagem"]["titulo"].ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        catch
-                        {
-                            MessageBox.Show("Sem Conexão com a internet Tente novamente", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                        }
-                    }
-                    notifyIcon1.Text = "Arquivos sincronizados Desde " + DateTime.Now;
-                    notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-                    notifyIcon1.BalloonTipText = "Todos os arquivos foram atualizados com sucesso";
-                    notifyIcon1.BalloonTipTitle = this.Text;
-                    if(receberNotificaçõesToolStripMenuItem.Checked) notifyIcon1.ShowBalloonTip(1000);
-                 
-                }
-                catch (Exception ex)
-                {
-                    syncerrs++;
-                    Console.WriteLine(ex.ToString());
-                    if (syncerrs>5)
-                    {
+                        notifyIcon1.Text = "Arquivos sincronizados Desde " + DateTime.Now;
                         notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-                        notifyIcon1.BalloonTipText = "Ocorreram "+syncerrs+" ao sincronizar com o servidor";
+                        notifyIcon1.BalloonTipText = "Todos os arquivos foram atualizados com sucesso";
                         notifyIcon1.BalloonTipTitle = this.Text;
-                        notifyIcon1.ShowBalloonTip(1000);
+                        if (receberNotificaçõesToolStripMenuItem.Checked) notifyIcon1.ShowBalloonTip(1000);
+
                     }
-                    //  MessageBox.Show("Erro de conexão: " + jobject["mensagem"]["mensagem"].ToString(), jobject["mensagem"]["titulo"].ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    catch (Exception ex)
+                    {
+                        syncerrs++;
+                        Console.WriteLine(ex.ToString());
+                        if (syncerrs > 5)
+                        {
+                            notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+                            notifyIcon1.BalloonTipText = "Ocorreram " + syncerrs + " ao sincronizar com o servidor";
+                            notifyIcon1.BalloonTipTitle = this.Text;
+                            notifyIcon1.ShowBalloonTip(1000);
+                        }
+                        //  MessageBox.Show("Erro de conexão: " + jobject["mensagem"]["mensagem"].ToString(), jobject["mensagem"]["titulo"].ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    }
+
+                    filessync = true;
+                    notifyIcon1.Text = "Arquivos sincronizados Desde " + DateTime.Now;
 
                 }
-               
-                filessync = true;
-                notifyIcon1.Text = "Arquivos sincronizados Desde " + DateTime.Now;
-               if(updatecount>25)
-                {
-                    Program.killapp();
-                }
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
             }
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-           
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
         public async void updatetickAsync(object sender, EventArgs e)
@@ -850,34 +852,7 @@ namespace DropDownloader
                 return false;
             }
         }
-        public static void InvokeIfRequired(Control control, MethodInvoker action)
-        {
-            if (control.IsDisposed)
-            {
-                return;
-            }
-
-            if (control.InvokeRequired)
-            {
-                try
-                {
-                    control.Invoke(action);
-                }
-                catch (ObjectDisposedException) { }
-                catch (InvalidOperationException e)
-                {
-                    // Intercept only invokation errors (a bit tricky)
-                    if (!e.Message.Contains("Invoke"))
-                    {
-                        throw e;
-                    }
-                }
-            }
-            else
-            {
-                action();
-            }
-        }
+       
         string MyPcID()
         {
             string cpuInfo = string.Empty;

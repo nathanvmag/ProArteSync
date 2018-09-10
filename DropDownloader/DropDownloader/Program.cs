@@ -16,9 +16,7 @@ namespace DropDownloader
         [STAThread]
         static void Main()
         {
-            try
-            {
-             
+                        
                 if (!SingleInstance.Start())
                 {
                     SingleInstance.ShowFirstInstance();
@@ -40,24 +38,10 @@ namespace DropDownloader
                     first = true;
                 }
                 SingleInstance.Stop();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Erro=  "+e.ToString());
-                //killapp();
-            }
+            
+          
 
-        }
-        public static void killapp()
-        {/*
-            try
-            {
-                Process.Start(Application.ExecutablePath);
-                Process.GetCurrentProcess().Kill();
-            }
-            catch
-            { }*/
-        }
+        }        
     }
 }
 

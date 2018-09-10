@@ -8,7 +8,7 @@
         <expiration maximumAge="0" unit="days" />
       </update>
     </subscription>
-    <deploymentProvider codebase="http://desktop-vtb06ar/proarte/Pro%20Arte%20Sync.application" />
+    <deploymentProvider codebase="http://nathan-pc/proarte/Pro%20Arte%20Sync.application" />
   </deployment>
   <compatibleFrameworks xmlns="urn:schemas-microsoft-com:clickonce.v2">
     <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
@@ -21,7 +21,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>s0tZWnRCxG6UoSg3GAphF5XP2q5bTOl+HfHr1IlskUs=</dsig:DigestValue>
+        <dsig:DigestValue>x8BlH5U4n0J/Od42zL+lUKi1N3XIVK7tIizx8L8s7gU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

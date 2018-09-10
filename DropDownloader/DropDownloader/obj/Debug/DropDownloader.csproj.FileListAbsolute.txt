@@ -75,3 +75,4 @@ Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\obj\Debug\DropDo
 Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.TrustInfo.xml
 Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.exe.manifest
 Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.application
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\DropDownloader.pastaspref.resources

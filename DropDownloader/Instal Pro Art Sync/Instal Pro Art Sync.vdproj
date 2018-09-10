@@ -70,7 +70,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5E1AB203D04497DB0043099669A9A02A"
+        "OwnerKey" = "8:_E9D7D11998CEF0267F4A7133CAEB646F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -82,7 +82,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E9D7D11998CEF0267F4A7133CAEB646F"
+        "OwnerKey" = "8:_5E1AB203D04497DB0043099669A9A02A"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -365,15 +365,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Pro Arte Sync"
-        "ProductCode" = "8:{604E52F5-6C7C-470C-9CA1-B5DE14490664}"
-        "PackageCode" = "8:{ED567336-0BFB-4715-8EB3-4D6CE49035CD}"
+        "ProductCode" = "8:{D0D2737C-7B84-4147-AC41-2A905FD49723}"
+        "PackageCode" = "8:{05E43010-CE62-4096-9C40-481A478E5820}"
         "UpgradeCode" = "8:{952A42BB-BCAC-4631-A462-F548F8D206DF}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.21"
+        "ProductVersion" = "8:1.0.23"
         "Manufacturer" = "8:ComunicPlus"
         "ARPHELPTELEPHONE" = "8:contato@comunicplus.com"
         "ARPHELPLINK" = "8:comunicplus.com"
