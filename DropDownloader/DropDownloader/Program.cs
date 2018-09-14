@@ -15,9 +15,9 @@ namespace DropDownloader
         /// </summary>
         [STAThread]
         static void Main()
-        {
-                        
-                if (!SingleInstance.Start())
+        {       
+
+            if (!SingleInstance.Start())
                 {
                     SingleInstance.ShowFirstInstance();
                     return;
@@ -30,15 +30,15 @@ namespace DropDownloader
 
                 if (!f1.logado && !first)
                 {
-                    Console.WriteLine("firstEnter");
+                f1 mainForm = new f1();
 
-                    f1 mainForm = new f1();
+                Console.WriteLine("firstEnter");
+
                     if (!mainForm.checkUpdates())
                         Application.Run(mainForm);
                     first = true;
                 }
-                SingleInstance.Stop();
-            
+                SingleInstance.Stop();          
           
 
         }        

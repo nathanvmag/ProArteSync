@@ -24,8 +24,6 @@ C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Debug\DropDownload
 C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Debug\DropDownloader.feedback.resources
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\foldericon.ico
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\Pro Arte Sync.exe.config
-D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\Pro Arte Sync.exe.manifest
-D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\Pro Arte Sync.application
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\Pro Arte Sync.exe
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\Pro Arte Sync.pdb
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\Dropbox.Api.dll
@@ -41,14 +39,11 @@ D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\DropDownloader.Pro
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\DropDownloader.Userinfos.resources
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\DropDownloader.csproj.GenerateResource.cache
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\DropDownloader.csproj.CoreCompileInputs.cache
-D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.exe.manifest
-D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.application
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\DropDownloader.csproj.CopyComplete
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.exe
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.pdb
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\Pro Arte Sync.exe.CodeAnalysisLog.xml
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\Pro Arte Sync.exe.lastcodeanalysissucceeded
-D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.TrustInfo.xml
 Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\bin\Debug\Pro Arte Sync.exe.config
 Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\obj\Debug\Interop.IWshRuntimeLibrary.dll
 Z:\github\Proartesync\Proartesync\DropDownloader\DropDownloader\obj\Debug\DropDownloader.csproj.ResolveComReference.cache

@@ -42,12 +42,14 @@ namespace DropDownloader
         BackgroundWorker updater;
         Version myvers;
         int updatecount;
+        bool userclose;
         List<string> PastaNames;
         public f1()
         {
-            
-            InitializeComponent();  
-            if(System.IO.File.Exists(Path.Combine(Path.GetTempPath(), "proconfig.txt")))
+            InitializeComponent();
+
+            userclose = false;
+            if (System.IO.File.Exists(Path.Combine(Path.GetTempPath(), "proconfig.txt")))
             {
                 StreamReader sr = new StreamReader(Path.Combine(Path.GetTempPath(), "proconfig.txt"));
                 string confi = sr.ReadToEnd();
@@ -101,6 +103,7 @@ namespace DropDownloader
             looper.RunWorkerAsync();
             updater = new BackgroundWorker();
             updater.DoWork += UpdateFilesAsync;
+            updater.WorkerSupportsCancellation = true;
             updater.RunWorkerAsync();
             updater.RunWorkerCompleted += Updater_RunWorkerCompleted;
 
@@ -155,6 +158,10 @@ namespace DropDownloader
                     doLoop(sender, e);
 
             }
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
         
         
@@ -177,7 +184,7 @@ namespace DropDownloader
             }
         }
 
-        private async void button1_ClickAsync(object sender, EventArgs e)
+        private void button1_ClickAsync(object sender, EventArgs e)
         {
             int counter = 0;
             while (dbx == null && counter < 3)
@@ -641,20 +648,23 @@ namespace DropDownloader
                 GC.WaitForPendingFinalizers();
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            updater.CancelAsync();
 
         }
-        public async void updatetickAsync(object sender, EventArgs e)
+        public void updatetickAsync(object sender, EventArgs e)
         {
 
             if (filessync)
             {
                 /* Thread td = new Thread(UpdateFilesAsync);
                  td.Start();*/
+                
                 updater.RunWorkerAsync();
             }
             
@@ -662,7 +672,7 @@ namespace DropDownloader
 
         
 
-        public async void atualizarToolStripMenuItem_Click(object sender, EventArgs e)
+        public void atualizarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (filessync)
             {
@@ -687,8 +697,10 @@ namespace DropDownloader
             DialogResult dr = MessageBox.Show("Você tem certeza que deseja sair ? Os arquivos não serão mais sincronizados", "Sair", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if(dr==DialogResult.Yes)
             {
+                userclose = true;
                 this.Close();
                 Application.Exit();
+
             }
         }
 
@@ -838,6 +850,8 @@ namespace DropDownloader
                         st.Write(JsonConvert.SerializeObject(opts));
                         st.Close();
                         Process.Start(Path.Combine(System.IO.Path.GetTempPath(), "updateproarte.msi"));
+
+                        userclose = false;
                         return true;
                     }
                     return false;
@@ -848,7 +862,7 @@ namespace DropDownloader
             }
             catch
             {
-                if (fb != null) fb.Close();
+                //if (fb != null) fb.Close();
                 return false;
             }
         }
@@ -889,18 +903,27 @@ namespace DropDownloader
 
         private void f1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (string.IsNullOrEmpty(Properties.Settings.Default.User))
+            if(!userclose)
             {
-                List<string> opts = new List<string>();
-                opts.Add(Properties.Settings.Default.User);
-                opts.Add(Properties.Settings.Default.Pass);
-                opts.Add(Properties.Settings.Default.Folder);
-                opts.Add(Properties.Settings.Default.DeviceID);
-                opts.Add(Properties.Settings.Default.acesso);
-                StreamWriter st = new StreamWriter(Path.Combine(Path.GetTempPath(), "proconfig.txt"));
-                st.Write(JsonConvert.SerializeObject(opts));
-                st.Close();
+                e.Cancel = true;
+                return;
             }
+            DialogResult dr= MessageBox.Show("Voce tem certeza que deseja fechar ?", "Fechar", MessageBoxButtons.YesNo);
+
+            if (dr == DialogResult.Yes)
+                if (string.IsNullOrEmpty(Properties.Settings.Default.User))
+                {
+                    List<string> opts = new List<string>();
+                    opts.Add(Properties.Settings.Default.User);
+                    opts.Add(Properties.Settings.Default.Pass);
+                    opts.Add(Properties.Settings.Default.Folder);
+                    opts.Add(Properties.Settings.Default.DeviceID);
+                    opts.Add(Properties.Settings.Default.acesso);
+                    StreamWriter st = new StreamWriter(Path.Combine(Path.GetTempPath(), "proconfig.txt"));
+                    st.Write(JsonConvert.SerializeObject(opts));
+                    st.Close();
+                }
+                else e.Cancel= true;
         }
 
         private void definirPreferenciasNovoToolStripMenuItem_Click(object sender, EventArgs e)
