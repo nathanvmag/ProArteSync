@@ -23,8 +23,6 @@ C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Release\Pro Arte S
 C:\Users\natha\source\repos\DropDownloader\DropDownloader\obj\Release\Pro Arte Sync.application
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Release\foldericon.ico
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Release\Pro Arte Sync.exe.config
-D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Release\Pro Arte Sync.exe.manifest
-D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Release\Pro Arte Sync.application
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Release\Pro Arte Sync.exe
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Release\Pro Arte Sync.pdb
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Release\Dropbox.Api.dll
@@ -40,11 +38,9 @@ D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Release\DropDownloader.P
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Release\DropDownloader.Userinfos.resources
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Release\DropDownloader.csproj.GenerateResource.cache
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Release\DropDownloader.csproj.CoreCompileInputs.cache
-D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Release\Pro Arte Sync.TrustInfo.xml
-D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Release\Pro Arte Sync.exe.manifest
-D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Release\Pro Arte Sync.application
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Release\DropDownloader.csproj.CopyComplete
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Release\Pro Arte Sync.exe
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Release\Pro Arte Sync.pdb
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Release\Pro Arte Sync.exe.CodeAnalysisLog.xml
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Release\Pro Arte Sync.exe.lastcodeanalysissucceeded
+D:\GitHub\Proartesync\DropDownloader\DropDownloader\obj\Release\DropDownloader.pastaspref.resources

@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_4A908A25D6A543D6B2759A242F7AAA1D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_564ECD83B1FE4384964D4472CC22873A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -52,7 +58,7 @@
         "Entry"
         {
         "MsmKey" = "8:_E9D7D11998CEF0267F4A7133CAEB646F"
-        "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
+        "OwnerKey" = "8:_4A908A25D6A543D6B2759A242F7AAA1D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -63,6 +69,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_E9D7D11998CEF0267F4A7133CAEB646F"
+        "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
         "MsmSig" = "8:_UNDEFINED"
@@ -70,7 +82,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E9D7D11998CEF0267F4A7133CAEB646F"
+        "OwnerKey" = "8:_5E1AB203D04497DB0043099669A9A02A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -82,7 +94,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5E1AB203D04497DB0043099669A9A02A"
+        "OwnerKey" = "8:_4A908A25D6A543D6B2759A242F7AAA1D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_E9D7D11998CEF0267F4A7133CAEB646F"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -207,6 +225,11 @@
             "AssemblyAsmDisplayName" = "8:Dropbox.Api, Version=4.0.0.0, Culture=neutral, PublicKeyToken=310f0e82fbb45d01, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_5E1AB203D04497DB0043099669A9A02A"
+                    {
+                    "Name" = "8:Dropbox.Api.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Dropbox.Api.dll"
             "TargetName" = "8:"
@@ -233,6 +256,11 @@
             "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_5E8AED666EB4C084AD9800F4E58E1143"
+                    {
+                    "Name" = "8:Newtonsoft.Json.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Newtonsoft.Json.dll"
             "TargetName" = "8:"
@@ -279,6 +307,11 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
+                    "_E9D7D11998CEF0267F4A7133CAEB646F"
+                    {
+                    "Name" = "8:System.Net.Http.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -365,15 +398,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Pro Arte Sync"
-        "ProductCode" = "8:{DC4483FF-113A-499F-8F44-17F2B37E28BC}"
-        "PackageCode" = "8:{F04923D4-1837-46D8-A17A-10473AABDF18}"
+        "ProductCode" = "8:{3D1D02B0-7A60-40D8-80BB-50A23669C8E0}"
+        "PackageCode" = "8:{1189B954-DCE8-4328-93B6-46E895529CF4}"
         "UpgradeCode" = "8:{952A42BB-BCAC-4631-A462-F548F8D206DF}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.25"
+        "ProductVersion" = "8:1.0.33"
         "Manufacturer" = "8:ComunicPlus"
         "ARPHELPTELEPHONE" = "8:contato@comunicplus.com"
         "ARPHELPLINK" = "8:comunicplus.com"
@@ -913,6 +946,34 @@
         }
         "ProjectOutput"
         {
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_4A908A25D6A543D6B2759A242F7AAA1D"
+            {
+            "SourcePath" = "8:..\\fix\\obj\\Debug\\fix.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_D70C8B2E2B4E4C95B6FE6EBF6149D4B7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{B21E0E1F-4471-4658-8D8B-2C7F7CBC3BC9}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
             {
             "SourcePath" = "8:..\\DropDownloader\\obj\\Debug\\Pro Arte Sync.exe"
