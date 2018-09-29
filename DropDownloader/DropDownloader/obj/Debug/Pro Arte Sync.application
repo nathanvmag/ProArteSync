@@ -11,17 +11,17 @@
     <deploymentProvider codebase="http://nathan-pc/proarte/Pro%20Arte%20Sync.application" />
   </deployment>
   <compatibleFrameworks xmlns="urn:schemas-microsoft-com:clickonce.v2">
-    <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
+    <framework targetVersion="4.5.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Pro Arte Sync.exe.manifest" size="6745">
+    <dependentAssembly dependencyType="install" codebase="Pro Arte Sync.exe.manifest" size="6899">
       <assemblyIdentity name="Pro Arte Sync.exe" version="1.0.0.8" publicKeyToken="0000000000000000" language="pt-BR" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ysQ9eCVIqP5UT1/DLV/nh7+YW3hGbKn/cCbSMfsRJgM=</dsig:DigestValue>
+        <dsig:DigestValue>JiluWr5geodPewgWzLElddrfoQUBK923b6NItDZ0ma0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

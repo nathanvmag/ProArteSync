@@ -76,3 +76,4 @@ D:\GitHub\Proartesync\DropDownloader\DropDownloader\obj\Debug\DropDownloader.csp
 D:\GitHub\Proartesync\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.exe
 D:\GitHub\Proartesync\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.pdb
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\DropDownloader.csprojAssemblyReference.cache
+D:\GitHub\Proartesync\DropDownloader\DropDownloader\bin\Debug\Microsoft.CSharp.dll

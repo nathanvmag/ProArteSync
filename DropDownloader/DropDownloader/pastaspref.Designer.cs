@@ -48,7 +48,7 @@
             this.Controls.Add(this.treeView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "pastaspref";
-            this.Text = "Minhas Preferências";
+            this.Text = "Escolher Conteúdo";
             this.ResumeLayout(false);
 
         }

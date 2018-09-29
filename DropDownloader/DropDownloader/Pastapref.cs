@@ -75,7 +75,7 @@ namespace DropDownloader
                     return pf.check;
                 }
             }
-            return false;
+            return true;
             
         }
     }

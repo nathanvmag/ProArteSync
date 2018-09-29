@@ -44,3 +44,8 @@ D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Release\Pro Arte Sync.pd
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Release\Pro Arte Sync.exe.CodeAnalysisLog.xml
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Release\Pro Arte Sync.exe.lastcodeanalysissucceeded
 D:\GitHub\Proartesync\DropDownloader\DropDownloader\obj\Release\DropDownloader.pastaspref.resources
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Release\Pro Arte Sync.exe.manifest
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Release\Pro Arte Sync.application
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Release\Pro Arte Sync.TrustInfo.xml
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Release\Pro Arte Sync.exe.manifest
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Release\Pro Arte Sync.application

@@ -74,13 +74,13 @@ namespace DropDownloader
         public const int HWND_BROADCAST = 0xffff;
         public const int SW_SHOWNORMAL = 1;
 
-        [DllImport("user32")]
+        [DllImport("user32.dll")]
         public static extern bool PostMessage(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam);
 
         [DllImportAttribute("user32.dll")]
         public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
-        [DllImportAttribute("user32.dll")]
+        [DllImport("user32.dll")]
         public static extern bool SetForegroundWindow(IntPtr hWnd);
 
         public static void ShowToFront(IntPtr window)

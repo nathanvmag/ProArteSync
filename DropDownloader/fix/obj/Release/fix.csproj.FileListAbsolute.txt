@@ -1,0 +1,10 @@
+D:\GitHub\ProArteSync\DropDownloader\fix\bin\Release\fix.exe.config
+D:\GitHub\ProArteSync\DropDownloader\fix\bin\Release\fix.exe
+D:\GitHub\ProArteSync\DropDownloader\fix\bin\Release\fix.pdb
+D:\GitHub\ProArteSync\DropDownloader\fix\obj\Release\fix.csprojAssemblyReference.cache
+D:\GitHub\ProArteSync\DropDownloader\fix\obj\Release\fix.Form1.resources
+D:\GitHub\ProArteSync\DropDownloader\fix\obj\Release\fix.Properties.Resources.resources
+D:\GitHub\ProArteSync\DropDownloader\fix\obj\Release\fix.csproj.GenerateResource.cache
+D:\GitHub\ProArteSync\DropDownloader\fix\obj\Release\fix.csproj.CoreCompileInputs.cache
+D:\GitHub\ProArteSync\DropDownloader\fix\obj\Release\fix.exe
+D:\GitHub\ProArteSync\DropDownloader\fix\obj\Release\fix.pdb

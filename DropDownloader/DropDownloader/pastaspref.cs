@@ -25,9 +25,11 @@ namespace DropDownloader
             paths = new List<string>();
             treeView1.CheckBoxes = true;
             treeView1.AfterCheck += TreeView1_AfterCheck; ;
+            
             try
             {
                 DisplayTreeView(JToken.Parse(json), @"Pastas :\");
+                
             }
             catch
             {
@@ -75,16 +77,44 @@ namespace DropDownloader
             }
             catch(Exception xp)
             {
-                MessageBox.Show("Erro ao gerar pastas "+xp.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Erro ao gerar pastas, os arquivos ainda não foram carregados \r\n "+xp.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            try
+            {/*
+                  List<TreeNode> tr = treeView1.GetAllNodes();
+                   List<TreeNode> checados = new List<TreeNode>();
+
+                   foreach (TreeNode te in tr)
+                   {
+                       int a = -1;
+                       Console.WriteLine("procurei node2 " + te.Name);
+
+                       if (!checados.Contains(te))
+                           for (int i = 0; i < te.Nodes.Count; i++)
+                           {
+                               a++;
+                               Console.WriteLine("procurei node " + te.Name);
+                               if (te.Nodes[i].Checked) a++;
+                           }
+                       if (a !=0&& te.Nodes.Count>0) te.Checked = false;
+                       checados.Add(te);
+                   }*/
+            }
+            catch
+            {
+
             }
         }
 
         private void TreeView1_AfterCheck(object sender, TreeViewEventArgs e)
         {
-            if(!working)
+            if (!working)
+            {
                 for (int i = 0; i < e.Node.Nodes.Count; i++)
                     e.Node.Nodes[i].Checked = e.Node.Checked;
+
                
+            }
            
             if (initial)
             {
@@ -117,8 +147,10 @@ namespace DropDownloader
             try
             {
                 treeView1.Nodes.Clear();
-                var tNode = treeView1.Nodes[treeView1.Nodes.Add(new TreeNode(rootName))];
+                
+                var tNode = treeView1.Nodes[treeView1.Nodes.Add(new TreeNode(rootName) )];
                 tNode.Tag = root;
+                
 
                 AddNode(root, tNode);
 
@@ -138,7 +170,7 @@ namespace DropDownloader
                 if (!string.IsNullOrEmpty( token.ToString()))
                 {
                     TreeNode tr = new TreeNode(token.ToString());
-                    tr.Checked = true;
+                    tr.Checked = false;
                     var childNode = inTreeNode.Nodes[inTreeNode.Nodes.Add(tr)];
                     childNode.Tag = token;
                 }
@@ -148,7 +180,7 @@ namespace DropDownloader
                 var obj = (JObject)token;
                 foreach (var property in obj.Properties())
                 {
-                    var childNode = inTreeNode.Nodes[inTreeNode.Nodes.Add(new TreeNode(property.Name) { Checked = true })];
+                    var childNode = inTreeNode.Nodes[inTreeNode.Nodes.Add(new TreeNode(property.Name) { Checked = false })];
                     childNode.Tag = property;
                     AddNode(property.Value, childNode);
                 }

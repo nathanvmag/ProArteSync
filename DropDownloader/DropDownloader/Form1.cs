@@ -38,7 +38,6 @@ namespace DropDownloader
         public static string donwpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "downloaddocs.txt");
         public static f1 me;
         public static string iconpath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + @"\foldericon.ico";
-        Userinfos uf;
         BackgroundWorker updater;
         Version myvers;
         int updatecount;
@@ -47,11 +46,13 @@ namespace DropDownloader
         List<string> PastaNames;
         public static string pastapath;
         public static List<Pastapref> prefpastas;
+        bool firstget;
 
         public f1()
         {
 
             InitializeComponent();
+            firstget = false;
             pastapath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "pastapref.txt");
             if(System.IO.File.Exists(pastapath))
             {
@@ -127,7 +128,6 @@ namespace DropDownloader
             updater.RunWorkerCompleted += Updater_RunWorkerCompleted;
 
 
-            uf = new Userinfos(this);
             updatecount = 0;
             PastaNames = new List<string>();
             
@@ -211,6 +211,7 @@ namespace DropDownloader
 
         private void button1_ClickAsync(object sender, EventArgs e)
         {
+            if (!logado) { 
             int counter = 0;
             while (dbx == null && counter < 3)
             {
@@ -219,128 +220,141 @@ namespace DropDownloader
             }
             if (!string.IsNullOrEmpty(textBox3.Text) && dbx != null)
             {
-                JObject jobject = null;
-                try
-                {
-                    if (string.IsNullOrWhiteSpace( textBox3.Text)||!textBox3.Text.Contains("Conteudo Pro Arte"))
-                        syncpath = textBox3.Text + @"\Conteudo Pro Arte";
-                    else syncpath = textBox3.Text;
-                    receberNotificaçõesToolStripMenuItem.Checked = checkBox1.Checked;
-                    string resu = MakeLogin(textBox1.Text, textBox2.Text);
-                    Properties.Settings.Default.DeviceID = MyPcID();
-
-                    Properties.Settings.Default.User = textBox1.Text;
-                    Properties.Settings.Default.Pass = textBox2.Text;
-                    Properties.Settings.Default.Folder = syncpath;
-                    Properties.Settings.Default.Notification = checkBox1.Checked;
-                    Properties.Settings.Default.Save();
-                    jobject = JObject.Parse(resu);
-                    if(!Directory.Exists(syncpath))
-                    {
-                        Console.WriteLine("Criou e mudou icone");
-                        Directory.CreateDirectory(syncpath);
-                        WinApi.ApplyFolderIcon(syncpath, iconpath);
-                        if (!System.IO.File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+@"\Conteudo Pro Arte Sync.lnk"))
-                        {
-                            CreateShortcut((string)Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Conteudo Pro Arte Sync.lnk",syncpath);
-                        }
-                        else
-                        {
-                            System.IO.File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Conteudo Pro Arte Sync.lnk");
-                            CreateShortcut((string)Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Conteudo Pro Arte Sync.lnk", syncpath);
-
-                        }
-                    }
-                    else
-                    {
-                        WinApi.ApplyFolderIcon(syncpath, iconpath);
-                        Console.WriteLine("mudou icone");
-                        if(!System.IO.File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Conteudo Pro Arte Sync.lnk"))
-                        {
-                            CreateShortcut((string)Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Conteudo Pro Arte Sync.lnk", syncpath);
-                        }
-                        else
-                        {
-                            System.IO.File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Conteudo Pro Arte Sync.lnk");
-                            CreateShortcut((string)Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Conteudo Pro Arte Sync.lnk", syncpath);
-
-                        }
-
-                    }
-
-                    if ((bool)jobject["sucesso"] == true)
-                    {
-                        if (!(bool)jobject["alerta"])
-                        {
-                            if(!automatic)this.Hide();
-                            ShowInTaskbar = true;                            
-                            notifyIcon1.Visible = true;
-                            notifyIcon1.Text = "Pro Arte Sync";
-                            logado = true;
-
-                        }
-                        else
-                        {
-                            MessageBox.Show("Alerta : " + jobject["mensagem"]["mensagem"].ToString(), jobject["mensagem"]["titulo"].ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            if(!automatic)this.Hide();
-                            ShowInTaskbar = true;
-                            notifyIcon1.Visible = true;
-                            notifyIcon1.Text = "Logado";
-                            notifyIcon1.Icon = Icon.FromHandle( Properties.Resources.atualizado.GetHicon());
-                            logado = true;
-                        }
-                        Console.WriteLine(notifyIcon1.Text);
-                        notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-                        notifyIcon1.BalloonTipText = "Logado com sucesso";
-                        notifyIcon1.BalloonTipTitle = this.Text;
-                        notifyIcon1.ShowBalloonTip(1000);
-
-                       /* Thread td = new Thread(UpdateFilesAsync);
-                        td.Start();*/
-                    }
-                    else
-                    {
-                        throw new Exception();
-                    }
-                }
-                catch(Exception xe)
-                {
-                    Properties.Settings.Default.User = null;
-                    Properties.Settings.Default.Pass = null;
-                    Properties.Settings.Default.Folder = string.Empty;
-                    Properties.Settings.Default.Save();
-                    Properties.Settings.Default.Reload();
-                    Console.WriteLine(xe.ToString());
-                     logado = false;
+                    JObject jobject = null;
                     try
                     {
-                        MessageBox.Show("Erro de conexão: " + jobject["mensagem"]["mensagem"].ToString(), jobject["mensagem"]["titulo"].ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        if (string.IsNullOrWhiteSpace(textBox3.Text) || !textBox3.Text.Contains("Conteudo Pro Arte"))
+                            syncpath = textBox3.Text + @"\Conteudo Pro Arte";
+                        else syncpath = textBox3.Text;
+                        receberNotificaçõesToolStripMenuItem.Checked = checkBox1.Checked;
+                        string resu = MakeLogin(textBox1.Text, textBox2.Text);
+                        Properties.Settings.Default.DeviceID = MyPcID();
+
+                        Properties.Settings.Default.User = textBox1.Text;
+                        Properties.Settings.Default.Pass = textBox2.Text;
+                        Properties.Settings.Default.Folder = syncpath;
+                        Properties.Settings.Default.Notification = checkBox1.Checked;
+                        Properties.Settings.Default.Save();
+                        jobject = JObject.Parse(resu);
+                        if (!Directory.Exists(syncpath))
+                        {
+                            Console.WriteLine("Criou e mudou icone");
+                            Directory.CreateDirectory(syncpath);
+                            WinApi.ApplyFolderIcon(syncpath, iconpath);
+                            if (!System.IO.File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Conteudo Pro Arte Sync.lnk"))
+                            {
+                                CreateShortcut((string)Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Conteudo Pro Arte Sync.lnk", syncpath);
+                            }
+                            else
+                            {
+                                System.IO.File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Conteudo Pro Arte Sync.lnk");
+                                CreateShortcut((string)Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Conteudo Pro Arte Sync.lnk", syncpath);
+
+                            }
+                        }
+                        else
+                        {
+                            WinApi.ApplyFolderIcon(syncpath, iconpath);
+                            Console.WriteLine("mudou icone");
+                            if (!System.IO.File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Conteudo Pro Arte Sync.lnk"))
+                            {
+                                CreateShortcut((string)Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Conteudo Pro Arte Sync.lnk", syncpath);
+                            }
+                            else
+                            {
+                                System.IO.File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Conteudo Pro Arte Sync.lnk");
+                                CreateShortcut((string)Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Conteudo Pro Arte Sync.lnk", syncpath);
+
+                            }
+
+                        }
+
+                        if ((bool)jobject["sucesso"] == true)
+                        {
+                            if (!(bool)jobject["alerta"])
+                            {
+                                if (!automatic) this.Hide();
+                                ShowInTaskbar = true;
+                                notifyIcon1.Visible = true;
+                                notifyIcon1.Text = "Pro Arte Sync";
+                                logado = true;
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("Alerta : " + jobject["mensagem"]["mensagem"].ToString(), jobject["mensagem"]["titulo"].ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                if (!automatic) this.Hide();
+                                ShowInTaskbar = true;
+                                notifyIcon1.Visible = true;
+                                notifyIcon1.Text = "Logado";
+                                notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.atualizado.GetHicon());
+                                logado = true;
+                            }
+                            Console.WriteLine(notifyIcon1.Text);
+                            notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+                            notifyIcon1.BalloonTipText = "Logado com sucesso";
+                            notifyIcon1.BalloonTipTitle = this.Text;
+                            notifyIcon1.ShowBalloonTip(1000);
+                            f1_VisibleChanged(null, null);
+                            /* Thread td = new Thread(UpdateFilesAsync);
+                             td.Start();*/
+                        }
+                        else
+                        {
+                            throw new Exception();
+                        }
                     }
-                    catch
+                    catch (Exception xe)
                     {
-                        MessageBox.Show("Sem Conexão com a internet Tente novamente", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Properties.Settings.Default.User = null;
+                        Properties.Settings.Default.Pass = null;
+                        Properties.Settings.Default.Folder = string.Empty;
+                        Properties.Settings.Default.Save();
+                        Properties.Settings.Default.Reload();
+                        Console.WriteLine(xe.ToString());
+                        logado = false;
+                        try
+                        {
+                            MessageBox.Show("Erro de conexão: " + jobject["mensagem"]["mensagem"].ToString(), jobject["mensagem"]["titulo"].ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Sem Conexão com a internet Tente novamente", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        syncpath = string.Empty;
+
+
                     }
-                    syncpath = string.Empty;
-                    
-                   
+
                 }
+                else if (dbx == null) MessageBox.Show("Erro ao conectar com servidor de sincronia", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else MessageBox.Show("Preencha todos os campos", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //automatic = false;
+            }
+            else
+            {
+                sairToolStripMenuItem_Click( sender,e);
 
             }
-            else if (dbx == null) MessageBox.Show("Erro ao conectar com servidor de sincronia", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else MessageBox.Show("Preencha todos os campos", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //automatic = false;
         }
 
 
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            if (!logado)
             {
-                if (folderBrowserDialog1.SelectedPath.Length < 5)
-                    MessageBox.Show("Local Inválido, por favor selecione outro", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                else
-                    textBox3.Text = folderBrowserDialog1.SelectedPath;
+                if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    if (folderBrowserDialog1.SelectedPath.Length < 5)
+                        MessageBox.Show("Local Inválido, por favor selecione outro", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                        textBox3.Text = folderBrowserDialog1.SelectedPath;
+                }
+            }else
+            {
+                Process.Start(Properties.Settings.Default.Folder);
+
             }
         }
         async void login()
@@ -376,12 +390,16 @@ namespace DropDownloader
             Console.WriteLine("My device id" + Properties.Settings.Default.DeviceID);
             Console.WriteLine("COMEÇEI");
             ServicePointManager.Expect100Continue = true;
-            WebClient wb = new WebClient();
-            wb.Encoding = Encoding.UTF8;
-            var reqparm = new System.Collections.Specialized.NameValueCollection();
-            reqparm.Add("usuario", user);
-            reqparm.Add("senha", pass);
-            reqparm.Add("app", Properties.Settings.Default.DeviceID);
+            WebClient wb = new WebClient
+            {
+                Encoding = Encoding.UTF8
+            };
+            var reqparm = new System.Collections.Specialized.NameValueCollection
+            {
+                { "usuario", user },
+                { "senha", pass },
+                { "app", Properties.Settings.Default.DeviceID }
+            };
             byte[] responsebytes = wb.UploadValues(site, "POST", reqparm);
             string responsebody = Encoding.UTF8.GetString(responsebytes);
             Console.WriteLine("resultado é " + responsebody);
@@ -414,11 +432,11 @@ namespace DropDownloader
                         syncpath = Properties.Settings.Default.Folder;
                         string resu = MakeLogin(textBox1.Text, textBox2.Text);
                         jobject = JObject.Parse(resu);
-                         
-                     
+
+
                         if ((bool)jobject["sucesso"] == true)
                         {
-                            if (this.Visible) this.Hide();
+                         //   if (this.Visible) this.Hide();
                             syncerrs = 0;
                             Properties.Settings.Default.acesso = jobject["acesso"].ToString();
                             Properties.Settings.Default.Save();
@@ -426,6 +444,7 @@ namespace DropDownloader
                             Console.WriteLine("Acesso " + jobject["acesso"]);
                             JArray lista = (JArray)jobject["lista"];
                             JToken controle = jobject["controle"];
+                            firstget = true;
                             pastascontrol = controle.ToString();
                             for (int i = 0; i < lista.Count; i++)
                             {
@@ -438,7 +457,7 @@ namespace DropDownloader
                                     lista[i]["origem"] = "/" + lista[i]["origem"].ToString().Replace("%dia%", now.Day > 9 ? now.Day.ToString() : "0" + now.Day).Replace("%mes%", now.Month > 9 ? now.Month.ToString() : "0" + now.Month).Replace("%ano%", now.Year.ToString());
                                     Console.WriteLine("MEU CAMINHO " + lista[i]["origem"]);
                                     if (f1.prefpastas == null || Pastapref.candonwload(prefpastas, lista[i]["origem"].ToString()))
-                                        {
+                                    {
 
                                         Metadata data = await dbx.Files.GetMetadataAsync(lista[i]["origem"].ToString());
                                         Console.WriteLine
@@ -494,9 +513,8 @@ namespace DropDownloader
                                                     Console.WriteLine("download concluido " + fileStream.Length + "  " + data.AsFile.Size);
                                                     if ((ulong)fileStream.Length != data.AsFile.Size)
                                                     {
-                                                        i--;
-                                                        Console.WriteLine("Replay");
-                                                        continue;
+                                                        // i--;                                                        Console.WriteLine("Replay");
+                                                        //   continue;
                                                     }
                                                     Console.WriteLine("total memory antes" + GC.GetTotalMemory(true));
 
@@ -522,11 +540,9 @@ namespace DropDownloader
 
                                     Console.WriteLine("error " + ex.ToString());
                                 }
-                                GC.Collect();
-                                GC.WaitForPendingFinalizers();
-                                GC.Collect();
-                                GC.WaitForPendingFinalizers();
                             }
+
+                                lista = null;
                             JArray pastas = (JArray)jobject["pastas"];
                             for (int i = 0; i < pastas.Count; i++)
                             {
@@ -550,7 +566,6 @@ namespace DropDownloader
                                         {
                                             Console.WriteLine("F{0,8} {1}", item.AsFile.Size, item.Name);
                                             Console.WriteLine("meta data de " + pastas[i]["origem"].ToString() + item.Name);
-
                                             destpath = Path.Combine(syncpath, pastas[i]["destino"].ToString());
                                             Metadata data = await dbx.Files.GetMetadataAsync(pastas[i]["origem"].ToString() + item.Name);
 
@@ -577,51 +592,41 @@ namespace DropDownloader
                                                 }
 
                                             }
-                                            using (var file = dbx.Files.DownloadAsync(lista[i]["origem"].ToString()).Result)
+                                            var file = dbx.Files.DownloadAsync(pastas[i]["origem"].ToString() + item.Name).Result;
+                                            var files = await file.GetContentAsStreamAsync();
+                                            using (FileStream fileStream = System.IO.File.Create(destpath))
                                             {
-                                                using (var files = await file.GetContentAsStreamAsync())
+                                                files.CopyTo(fileStream);
+                                                Console.WriteLine("download concluido " + fileStream.Length + "  " + data.AsFile.Size);
+                                                if ((ulong)fileStream.Length != data.AsFile.Size)
                                                 {
-                                                    using (FileStream fileStream = System.IO.File.Create(destpath))
-                                                    {
-                                                        files.CopyTo(fileStream);
-                                                        Console.WriteLine("download concluido " + fileStream.Length + "  " + data.AsFile.Size);
-                                                        if ((ulong)fileStream.Length != data.AsFile.Size)
-                                                        {
-                                                            i--;
-                                                            Console.WriteLine("Replay");
-                                                            continue;
-                                                        }
-                                                        files.Close();
-                                                        fileStream.Close();
-                                                        file.Dispose();
-                                                        files.Dispose();
-                                                        fileStream.Dispose();
-                                                    }
-                                                    notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Procurando.GetHicon());
-                                                    isdownloading = false;
-                                                    GC.Collect();
-                                                    GC.WaitForPendingFinalizers();
-                                                    GC.Collect();
-                                                    GC.WaitForPendingFinalizers();
-
+                                                    i--;
+                                                    Console.WriteLine("Replay");
+                                                    continue;
                                                 }
+                                                files.Close();
+                                                fileStream.Close();
+                                                file.Dispose();
+                                                files.Dispose();
+                                                fileStream.Dispose();
                                             }
+                                            notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Procurando.GetHicon());
+                                            isdownloading = false;
+
+
                                         }
-                                    
-                                    foreach (var item in list.Entries.Where(z => z.IsFolder))
-                                    {
-                                        Console.WriteLine("D  {0}/", item.Name);
-                                        JToken jt = JObject.Parse(pastas[i].ToString());
+                                        foreach (var item in list.Entries.Where(z => z.IsFolder))
+                                        {
+                                            Console.WriteLine("D  {0}/", item.Name);
+                                            JToken jt = JObject.Parse(pastas[i].ToString());
 
-                                        jt["origem"] = oldOrigem + item.Name + "/";
-                                        jt["destino"] += item.Name + "/";
-                                        Console.WriteLine(jt);
+                                            jt["origem"] = oldOrigem + item.Name + "/";
+                                            jt["destino"] += item.Name + "/";
+                                            Console.WriteLine(jt);
 
-                                        pastas.Add(jt);
+                                            pastas.Add(jt);
+                                        }
                                     }
-                                }
-                                    
-                                    else Console.WriteLine("Pulou");
                                 }
                                 catch
                                 {
@@ -636,6 +641,7 @@ namespace DropDownloader
 
 
                         }
+
                         else
                         {
                             Console.WriteLine("Nao logado");
@@ -682,14 +688,16 @@ namespace DropDownloader
                 GC.WaitForPendingFinalizers();
 
             }
-            catch (Exception ex)
+            catch 
+           
             {
-                MessageBox.Show(ex.Message);
+                Process.GetCurrentProcess().Kill();
+
             }
-          
+
 
         }
-        public void updatetickAsync(object sender, EventArgs e)
+        public void UpdatetickAsync(object sender, EventArgs e)
         {
 
             if (filessync)
@@ -739,7 +747,37 @@ namespace DropDownloader
         private void f1_VisibleChanged(object sender, EventArgs e)
         {
             Console.WriteLine("changed");
-            if (logado) this.Hide();
+           // if (logado) this.Hide();
+            if (Visible)
+            {
+                if (logado)
+                {
+                    label5.Text = "Conectado";
+                    label5.ForeColor = Color.MediumSeaGreen;
+                    label6.Text = "Obtendo Status";
+                    label6.BackColor = Color.MediumSeaGreen;
+                    button2.Text = "Abrir Pasta";
+                    button3.Text = "Mudar Pasta";
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    textBox1.Text = Properties.Settings.Default.User;
+                    button1.Text = "Desconectar";
+
+                }
+                else
+                {
+
+                    label5.Text = "Desconectado";
+                    label5.ForeColor = Color.Red;
+                    label6.Text = "Você está desconectado";
+                    label6.BackColor = Color.OrangeRed;
+                    button2.Text = "Selecionar Pasta";
+                    button3.Text = "Mudar Pasta";
+                    button3.Enabled = false;
+                    button4.Enabled = false;
+                    button1.Text = "Conectar";
+                }
+            }
         }
         private static string CalculateMd5(Stream stream)
         {
@@ -768,22 +806,23 @@ namespace DropDownloader
             textBox2.Text = "";
             textBox3.Text = "";
             notifyIcon1.Icon= Icon.FromHandle(Properties.Resources.Ícone.GetHicon());
+            if (System.IO.File.Exists(pastapath)) System.IO.File.Delete(pastapath);
             automatic = false;
+             f1_VisibleChanged (null, null);
         }
 
         private void receberNotificaçõesToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
-        {
+        { 
             checkBox1.Checked = receberNotificaçõesToolStripMenuItem.Checked;
             Properties.Settings.Default.Notification = receberNotificaçõesToolStripMenuItem.Checked;
             Properties.Settings.Default.Save();
         }
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
-        {   if (!Visible && !logado) Visible = true;
-              else
-            ShowWindow();
+        {
 
         }
+
 
         private void label4_Click(object sender, EventArgs e)
         {
@@ -809,9 +848,9 @@ namespace DropDownloader
             {
                 try
                 {
-                    uf.StartPosition = FormStartPosition.CenterScreen;
-
-                    uf.Visible = true;
+                    //uf.StartPosition = FormStartPosition.CenterScreen;
+                    this.Visible = true;
+                  //  uf.Visible = true;
                 }
                 catch (Exception e){
                     MessageBox.Show(e.ToString());
@@ -954,14 +993,16 @@ namespace DropDownloader
                     }
                 }
                 if (!string.IsNullOrEmpty(Properties.Settings.Default.User))
-                {                    
+                {
 
-                    List<string> opts = new List<string>();
-                    opts.Add(Properties.Settings.Default.User);
-                    opts.Add(Properties.Settings.Default.Pass);
-                    opts.Add(Properties.Settings.Default.Folder);
-                    opts.Add(Properties.Settings.Default.DeviceID);
-                    opts.Add(Properties.Settings.Default.acesso);
+                    List<string> opts = new List<string>
+                    {
+                        Properties.Settings.Default.User,
+                        Properties.Settings.Default.Pass,
+                        Properties.Settings.Default.Folder,
+                        Properties.Settings.Default.DeviceID,
+                        Properties.Settings.Default.acesso
+                    };
                     StreamWriter st = new StreamWriter(Path.Combine(Path.GetTempPath(), "proconfig.txt"));
                     st.Write(JsonConvert.SerializeObject(opts));
                     st.Close();
@@ -974,12 +1015,117 @@ namespace DropDownloader
 
         private void definirPreferenciasNovoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            pastaspref pf = new pastaspref(pastascontrol)
-            { StartPosition = FormStartPosition.CenterScreen, Visible = true
-
-            };
+          
             
 
+        }
+
+        private void button2_VisibleChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if (folderBrowserDialog1.SelectedPath.Length < 5)
+                    MessageBox.Show("Local Inválido, por favor selecione outro", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                {
+                    textBox3.Text = folderBrowserDialog1.SelectedPath;
+                    string syncpath;
+                    if (string.IsNullOrWhiteSpace(textBox3.Text) || !textBox3.Text.Contains("Conteudo Pro Arte"))
+                        syncpath = textBox3.Text + @"\Conteudo Pro Arte";
+                    else syncpath = textBox3.Text;
+                    if (!Directory.Exists(syncpath)) Directory.CreateDirectory(syncpath);
+                    Properties.Settings.Default.Folder = syncpath;
+                    Properties.Settings.Default.Save();
+                    Properties.Settings.Default.Reload();
+                    textBox3.Text = syncpath;
+                    WinApi.ApplyFolderIcon(syncpath, f1.iconpath);
+
+                    if (!System.IO.File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Conteudo Pro Arte Sync.lnk"))
+                    {
+                        f1.CreateShortcut((string)Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Conteudo Pro Arte Sync.lnk", syncpath);
+                    }
+                    else
+                    {
+                        System.IO.File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Conteudo Pro Arte Sync.lnk");
+                        f1.CreateShortcut((string)Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Conteudo Pro Arte Sync.lnk", syncpath);
+
+                    }
+                    UpdatetickAsync(sender, e);
+                }
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            definirPreferenciasNovoToolStripMenuItem_Click(sender, e);
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+           
+            if (this.Visible )
+            {
+                if (logado)
+                {
+                    button4.Enabled = firstget;
+                    if (f1.filessync)
+                    {
+                        label6.Text = "Todos arquivos Sincronizados";
+                        label6.BackColor = Color.MediumSeaGreen;
+                    }
+                    else if (f1.isdownloading)
+
+                    {
+                        label6.Text = "Baixando arquivos";
+                        label6.BackColor = Color.OrangeRed;
+                    }
+                    else
+                    {
+                        label6.Text = "Procurando arquivos";
+                        label6.BackColor = Color.CornflowerBlue;
+                    }
+                }else
+                {
+                    label6.Text = "Desconectado";
+                    label6.BackColor = Color.OrangeRed;
+                }
+            }
+        }
+
+        private void escolherConteúdoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pastaspref pf = new pastaspref(pastascontrol)
+            {
+                StartPosition = FormStartPosition.CenterScreen,
+                Visible = true
+
+            };
+        }
+
+        private void abrirProgramaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Visible = true;
+
+        }
+
+        private void procurarNovosArquivosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            atualizarToolStripMenuItem_Click(sender, e);
         }
 
         public static void CreateShortcut(string shortcutAddress,string target)

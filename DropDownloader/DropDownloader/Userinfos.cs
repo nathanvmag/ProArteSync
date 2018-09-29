@@ -63,7 +63,7 @@ namespace DropDownloader
                         f1.CreateShortcut((string)Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Conteudo Pro Arte Sync.lnk", syncpath);
 
                     }
-                    meform.updatetickAsync(sender, e);
+                    meform.UpdatetickAsync(sender, e);
                 }
             }
         }
