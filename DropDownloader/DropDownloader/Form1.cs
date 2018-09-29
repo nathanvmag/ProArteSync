@@ -119,14 +119,15 @@ namespace DropDownloader
            
             Console.WriteLine(iconpath);
             notifyIcon1.Text = "Pro Arte Sync";
-            BackgroundWorker looper = new BackgroundWorker();
-            looper.DoWork += doLoop;
-            looper.RunWorkerAsync();
+          //  BackgroundWorker looper = new BackgroundWorker();
+            //looper.DoWork += doLoop;
+            //looper.RunWorkerAsync();
             updater = new BackgroundWorker();
             updater.DoWork += UpdateFilesAsync;
             updater.RunWorkerAsync();
             updater.RunWorkerCompleted += Updater_RunWorkerCompleted;
-
+            updater.WorkerSupportsCancellation = true;
+            
 
             updatecount = 0;
             PastaNames = new List<string>();
@@ -148,8 +149,8 @@ namespace DropDownloader
                     if (!logado)
                     {
                         notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Ícone.GetHicon());
-                        await Task.Delay(3000);
-                        doLoop(sender,e);
+                       // await Task.Delay(3000);
+                        //doLoop(sender,e);
                     }
                     else if (!filessync)
                     {
@@ -166,21 +167,21 @@ namespace DropDownloader
                         await Task.Delay(1000);
                         notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Ícone.GetHicon());
 
-                        await Task.Delay(1000);
-                        doLoop(sender, e);
+                       // await Task.Delay(1000);
+                      //  doLoop(sender, e);
 
                 }
                 else
                     {
                         notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.atualizado.GetHicon());
-                        await Task.Delay(3000);
-                        doLoop(sender, e);
+                        //await Task.Delay(3000);
+                       // doLoop(sender, e);
 
                       }
             }
                 catch
                 {
-                    doLoop(sender, e);
+                   // doLoop(sender, e);
 
             }
             GC.Collect();
@@ -408,8 +409,7 @@ namespace DropDownloader
 
          async void UpdateFilesAsync(object sender, EventArgs e)
         {
-            try
-            {
+           
                 if (this.Visible) this.Hide();
                 if (dbx == null)
                 {
@@ -687,13 +687,7 @@ namespace DropDownloader
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
 
-            }
-            catch 
-           
-            {
-                Process.GetCurrentProcess().Kill();
-
-            }
+          
 
 
         }
@@ -718,6 +712,7 @@ namespace DropDownloader
             {
                 /* Thread td = new Thread(UpdateFilesAsync);
                  td.Start();*/
+                updater.CancelAsync();
                 updater.RunWorkerAsync();
 
             }
@@ -1105,6 +1100,7 @@ namespace DropDownloader
                     label6.BackColor = Color.OrangeRed;
                 }
             }
+            //doLoop(null, null);
         }
 
         private void escolherConteúdoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1125,7 +1121,70 @@ namespace DropDownloader
 
         private void procurarNovosArquivosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            atualizarToolStripMenuItem_Click(sender, e);
+            try
+            {
+                  if (filessync)
+                  {
+                    /* Thread td = new Thread(UpdateFilesAsync);
+                     td.Start();*/
+                    updater.CancelAsync();
+                      updater.RunWorkerAsync();
+
+                  }
+                Console.WriteLine("jdjsakdjsa");
+            }
+            catch
+            {
+                Console.WriteLine("errouuu");
+            }
+        }
+
+        private async void timer4_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!logado)
+                {
+                    notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Ícone.GetHicon());
+                     await Task.Delay(1000);
+                    //doLoop(sender,e);
+                }
+                else if (!filessync)
+                {
+                    if (isdownloading)
+                    {
+                        notifyIcon1.Text = "Baixando Arquivos";
+                        notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.baixando.GetHicon());
+                    }
+                    else
+                    {
+                        notifyIcon1.Text = "Procurando novos arquivos";
+                        notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Procurando.GetHicon());
+                    }
+                    await Task.Delay(1000);
+                    notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Ícone.GetHicon());
+
+                     await Task.Delay(1000);
+                    //  doLoop(sender, e);
+
+                }
+                else
+                {
+                    notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.atualizado.GetHicon());
+                    await Task.Delay(3000);
+                    // doLoop(sender, e);
+
+                }
+            }
+            catch
+            {
+                // doLoop(sender, e);
+
+            }
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         public static void CreateShortcut(string shortcutAddress,string target)

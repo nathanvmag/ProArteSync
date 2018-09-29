@@ -37,7 +37,11 @@
             this.button1 = new System.Windows.Forms.Button();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.abrirProgramaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.procurarNovosArquivosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.escolherConteúdoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.receberNotificaçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.procurarAtualizaçoesDoSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,10 +60,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.escolherConteúdoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.procurarNovosArquivosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.abrirProgramaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timer4 = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -142,13 +143,39 @@
             this.procurarAtualizaçoesDoSistemaToolStripMenuItem,
             this.fecharToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(242, 194);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(242, 166);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // abrirProgramaToolStripMenuItem
+            // 
+            this.abrirProgramaToolStripMenuItem.Name = "abrirProgramaToolStripMenuItem";
+            this.abrirProgramaToolStripMenuItem.Size = new System.Drawing.Size(241, 24);
+            this.abrirProgramaToolStripMenuItem.Text = "Abrir Programa";
+            this.abrirProgramaToolStripMenuItem.Click += new System.EventHandler(this.abrirProgramaToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(238, 6);
+            // 
+            // procurarNovosArquivosToolStripMenuItem
+            // 
+            this.procurarNovosArquivosToolStripMenuItem.Name = "procurarNovosArquivosToolStripMenuItem";
+            this.procurarNovosArquivosToolStripMenuItem.Size = new System.Drawing.Size(241, 24);
+            this.procurarNovosArquivosToolStripMenuItem.Text = "Procurar Novos Arquivos";
+            this.procurarNovosArquivosToolStripMenuItem.Click += new System.EventHandler(this.procurarNovosArquivosToolStripMenuItem_Click);
+            // 
+            // escolherConteúdoToolStripMenuItem
+            // 
+            this.escolherConteúdoToolStripMenuItem.Name = "escolherConteúdoToolStripMenuItem";
+            this.escolherConteúdoToolStripMenuItem.Size = new System.Drawing.Size(241, 24);
+            this.escolherConteúdoToolStripMenuItem.Text = "Escolher Conteúdo";
+            this.escolherConteúdoToolStripMenuItem.Click += new System.EventHandler(this.escolherConteúdoToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(238, 6);
             // 
             // receberNotificaçõesToolStripMenuItem
             // 
@@ -313,31 +340,11 @@
             this.timer3.Interval = 1000;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
-            // toolStripSeparator3
+            // timer4
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(238, 6);
-            // 
-            // escolherConteúdoToolStripMenuItem
-            // 
-            this.escolherConteúdoToolStripMenuItem.Name = "escolherConteúdoToolStripMenuItem";
-            this.escolherConteúdoToolStripMenuItem.Size = new System.Drawing.Size(241, 24);
-            this.escolherConteúdoToolStripMenuItem.Text = "Escolher Conteúdo";
-            this.escolherConteúdoToolStripMenuItem.Click += new System.EventHandler(this.escolherConteúdoToolStripMenuItem_Click);
-            // 
-            // procurarNovosArquivosToolStripMenuItem
-            // 
-            this.procurarNovosArquivosToolStripMenuItem.Name = "procurarNovosArquivosToolStripMenuItem";
-            this.procurarNovosArquivosToolStripMenuItem.Size = new System.Drawing.Size(241, 24);
-            this.procurarNovosArquivosToolStripMenuItem.Text = "Procurar Novos Arquivos";
-            this.procurarNovosArquivosToolStripMenuItem.Click += new System.EventHandler(this.procurarNovosArquivosToolStripMenuItem_Click);
-            // 
-            // abrirProgramaToolStripMenuItem
-            // 
-            this.abrirProgramaToolStripMenuItem.Name = "abrirProgramaToolStripMenuItem";
-            this.abrirProgramaToolStripMenuItem.Size = new System.Drawing.Size(241, 24);
-            this.abrirProgramaToolStripMenuItem.Text = "Abrir Programa";
-            this.abrirProgramaToolStripMenuItem.Click += new System.EventHandler(this.abrirProgramaToolStripMenuItem_Click);
+            this.timer4.Enabled = true;
+            this.timer4.Interval = 2000;
+            this.timer4.Tick += new System.EventHandler(this.timer4_Tick);
             // 
             // f1
             // 
@@ -409,6 +416,7 @@
         private System.Windows.Forms.ToolStripMenuItem escolherConteúdoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem procurarNovosArquivosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem abrirProgramaToolStripMenuItem;
+        private System.Windows.Forms.Timer timer4;
     }
 }
 

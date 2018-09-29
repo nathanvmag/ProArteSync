@@ -69,17 +69,10 @@ namespace DropDownloader
                 Application.Exit();
             }
         }
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        static int IWillStackOverflow(int i)
-        {
-            Process.GetCurrentProcess().Kill();
-
-            return IWillStackOverflow(i + 1);
-        }
-
+ 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-
+            Console.WriteLine("tive esse erro");
             Process.GetCurrentProcess().Kill();
             Application.ExitThread();
             Application.Exit();
@@ -87,6 +80,8 @@ namespace DropDownloader
 
         private static void ThreadHandler(object sender, ThreadExceptionEventArgs e)
         {
+
+            Console.WriteLine("tive esse erro");
             Process.GetCurrentProcess().Kill();
             Application.ExitThread();
             Application.Exit();

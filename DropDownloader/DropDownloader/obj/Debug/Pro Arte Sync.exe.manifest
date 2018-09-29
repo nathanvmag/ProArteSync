@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Pro Arte Sync.exe" size="1434696">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Pro Arte Sync.exe" size="1436232">
       <assemblyIdentity name="Pro Arte Sync" version="1.0.0.39" publicKeyToken="35929E045CEC078E" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>C8lxjKJU6tB92qPymBJjCsFZXuOrpVIyRhlPsEvX/lQ=</dsig:DigestValue>
+        <dsig:DigestValue>dBJpaeOOc709z8TY39Yg0UrVXerHf3kz6w8aN/mJKiM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -96,13 +96,13 @@
       <dsig:DigestValue>oT7KE120gfphUir2GYjcz7i6+e3QIlyCC8rau8DaOjc=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Pro Arte Sync.exe.config" size="1511">
+  <file name="Pro Arte Sync.exe.config" size="1509">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>AQxYaH+aDqhus8t9q1znwVpxl8cWRm2ItLDfjApoN1Y=</dsig:DigestValue>
+      <dsig:DigestValue>J7hRvZ6jrMIY3HSL+TeCPg1qGaGCkmW91A7nLORheB8=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
