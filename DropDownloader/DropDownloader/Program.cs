@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -36,7 +37,7 @@ namespace DropDownloader
                     // Set the unhandled exception mode to force all Windows Forms errors to go through
                     // our handler.
                     Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
-
+                    
                     // Add the event handler for handling non-UI thread exceptions to the event. 
                     AppDomain.CurrentDomain.UnhandledException +=
                         new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
@@ -46,7 +47,7 @@ namespace DropDownloader
                 if (!f1.logado && !first)
                 {
                     mainForm = new f1();
-
+                    
                     Console.WriteLine("firstEnter");
 
                     if (!mainForm.checkUpdates())
@@ -67,6 +68,13 @@ namespace DropDownloader
                 Application.ExitThread();
                 Application.Exit();
             }
+        }
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        static int IWillStackOverflow(int i)
+        {
+            Process.GetCurrentProcess().Kill();
+
+            return IWillStackOverflow(i + 1);
         }
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
