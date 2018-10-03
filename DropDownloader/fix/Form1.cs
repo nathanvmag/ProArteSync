@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,6 +57,56 @@ namespace fix
                 {
 
                 }
+            }
+        }
+        int debugtime,olddebug;
+        int errcount = 0;
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                var timedebugpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "timedebug.txt");
+                StreamReader sr = new StreamReader(timedebugpath);
+               
+                debugtime = Newtonsoft.Json.JsonConvert.DeserializeObject<int>(sr.ReadToEnd()) ;
+                sr.Close();
+                if (debugtime != olddebug)
+                {
+                    olddebug = debugtime;
+                    errcount = 0;
+                    Console.WriteLine(debugtime + " " + olddebug + " " + errcount);
+
+                }
+                else
+                {
+                    errcount++;
+                    Console.WriteLine("Error");
+                }
+                if(errcount>4 )
+                {
+                    Console.WriteLine("tentou fechar 1 vez");
+
+                    while (Process.GetProcessesByName("Pro Arte Sync").Length > 0)
+                    {
+                        //  e.Cancel = true;
+                        Console.WriteLine("tentou fechar");
+
+                        try
+                        {
+                            Process.GetProcessesByName("Pro Arte Sync")[0].Kill();
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+                    Process.Start("Pro Arte Sync.exe");
+
+                }
+            }
+            catch
+            {
+
             }
         }
     }

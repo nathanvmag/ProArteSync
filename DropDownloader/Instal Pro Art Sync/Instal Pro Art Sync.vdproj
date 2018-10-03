@@ -46,14 +46,20 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_C953D74520965AEC77CC4BE40D0B6D22"
-        "OwnerKey" = "8:_B98E24696D31785EF71761814AE5C91E"
+        "MsmKey" = "8:_C5D87DB57A1BD2E3611B699406E96D40"
+        "OwnerKey" = "8:_4A908A25D6A543D6B2759A242F7AAA1D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_C953D74520965AEC77CC4BE40D0B6D22"
+        "MsmKey" = "8:_C5D87DB57A1BD2E3611B699406E96D40"
         "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C5D87DB57A1BD2E3611B699406E96D40"
+        "OwnerKey" = "8:_B98E24696D31785EF71761814AE5C91E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -89,13 +95,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C953D74520965AEC77CC4BE40D0B6D22"
+        "OwnerKey" = "8:_4A908A25D6A543D6B2759A242F7AAA1D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4A908A25D6A543D6B2759A242F7AAA1D"
+        "OwnerKey" = "8:_C5D87DB57A1BD2E3611B699406E96D40"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -270,14 +276,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C953D74520965AEC77CC4BE40D0B6D22"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C5D87DB57A1BD2E3611B699406E96D40"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_C953D74520965AEC77CC4BE40D0B6D22"
+                    "_C5D87DB57A1BD2E3611B699406E96D40"
                     {
                     "Name" = "8:Newtonsoft.Json.dll"
                     "Attributes" = "3:512"
@@ -399,15 +405,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Pro Arte Sync"
-        "ProductCode" = "8:{5ABA2776-99EC-4A78-9435-EA6B0B7F4011}"
-        "PackageCode" = "8:{33CF1089-C6C5-4024-A079-D48018E784FE}"
+        "ProductCode" = "8:{A9B0712F-2FD0-4C95-B5B5-467B54AD0B9F}"
+        "PackageCode" = "8:{6C1AA61B-2AD6-41B8-895F-D378168066EF}"
         "UpgradeCode" = "8:{952A42BB-BCAC-4631-A462-F548F8D206DF}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.39"
+        "ProductVersion" = "8:1.0.47"
         "Manufacturer" = "8:ComunicPlus"
         "ARPHELPTELEPHONE" = "8:contato@comunicplus.com"
         "ARPHELPLINK" = "8:comunicplus.com"

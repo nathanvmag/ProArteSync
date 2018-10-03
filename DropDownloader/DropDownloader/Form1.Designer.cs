@@ -61,6 +61,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.timer4 = new System.Windows.Forms.Timer(this.components);
+            this.timer5 = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -346,6 +347,12 @@
             this.timer4.Interval = 2000;
             this.timer4.Tick += new System.EventHandler(this.timer4_Tick);
             // 
+            // timer5
+            // 
+            this.timer5.Enabled = true;
+            this.timer5.Interval = 11000;
+            this.timer5.Tick += new System.EventHandler(this.timer5_Tick);
+            // 
             // f1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -417,6 +424,7 @@
         private System.Windows.Forms.ToolStripMenuItem procurarNovosArquivosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem abrirProgramaToolStripMenuItem;
         private System.Windows.Forms.Timer timer4;
+        private System.Windows.Forms.Timer timer5;
     }
 }
 
