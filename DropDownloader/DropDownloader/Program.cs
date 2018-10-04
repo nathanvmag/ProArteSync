@@ -22,6 +22,7 @@ namespace DropDownloader
 
             try
             {
+                WinApi.RefreshTrayArea();
 
                 if (!SingleInstance.Start())
                 {
@@ -36,11 +37,11 @@ namespace DropDownloader
 
                     // Set the unhandled exception mode to force all Windows Forms errors to go through
                     // our handler.
-                    Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+                  // Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
                     
                     // Add the event handler for handling non-UI thread exceptions to the event. 
-                    AppDomain.CurrentDomain.UnhandledException +=
-                        new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+                    //AppDomain.CurrentDomain.UnhandledException +=
+                      //  new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
 
                 }
 
@@ -72,16 +73,16 @@ namespace DropDownloader
  
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            Console.WriteLine("tive esse erro");
+            Console.WriteLine("tive esse erro "+e.ExceptionObject.ToString());
             Process.GetCurrentProcess().Kill();
             Application.ExitThread();
             Application.Exit();
         }
-
+         
         private static void ThreadHandler(object sender, ThreadExceptionEventArgs e)
         {
 
-            Console.WriteLine("tive esse erro");
+            Console.WriteLine("tive esse erro "+e.Exception.ToString());
             Process.GetCurrentProcess().Kill();
             Application.ExitThread();
             Application.Exit();

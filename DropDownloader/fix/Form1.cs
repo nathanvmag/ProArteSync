@@ -43,6 +43,8 @@ namespace fix
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            Program.RefreshTrayArea();
+
             if (Process.GetProcessesByName("Pro Arte Sync").Length > 0)
             {
                 Console.WriteLine("Nao to aqui");
@@ -52,6 +54,7 @@ namespace fix
                 try
                 {
                     Process.Start("Pro Arte Sync.exe");
+                    Program.RefreshTrayArea();
                 }
                 catch
                 {
@@ -63,6 +66,8 @@ namespace fix
         int errcount = 0;
         private void timer2_Tick(object sender, EventArgs e)
         {
+            Program.RefreshTrayArea();
+
             try
             {
                 var timedebugpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "timedebug.txt");
@@ -101,7 +106,7 @@ namespace fix
                         }
                     }
                     Process.Start("Pro Arte Sync.exe");
-
+                    Program.RefreshTrayArea();
                 }
             }
             catch

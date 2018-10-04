@@ -94,5 +94,17 @@ namespace DropDownloader.Properties {
                 this["acesso"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int estilo {
+            get {
+                return ((int)(this["estilo"]));
+            }
+            set {
+                this["estilo"] = value;
+            }
+        }
     }
 }

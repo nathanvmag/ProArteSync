@@ -121,10 +121,11 @@ namespace DropDownloader
                 
                     
             }
-           
+            comboBox1.SelectedIndex = Properties.Settings.Default.estilo;
             Console.WriteLine(iconpath);
             notifyIcon1.Text = "Pro Arte Sync";
-          //  BackgroundWorker looper = new BackgroundWorker();
+            WinApi.RefreshTrayArea();
+            //  BackgroundWorker looper = new BackgroundWorker();
             //looper.DoWork += doLoop;
             //looper.RunWorkerAsync();
             updater = new BackgroundWorker();
@@ -136,7 +137,12 @@ namespace DropDownloader
 
             updatecount = 0;
             PastaNames = new List<string>();
-            
+            comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;   
+        }
+
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            updateBOX();
         }
 
         private void Updater_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -211,7 +217,9 @@ namespace DropDownloader
         {
             if (WindowState == FormWindowState.Minimized)
             {
-                            WindowState = FormWindowState.Minimized;            WindowState = FormWindowState.Minimized;Visible=false;
+                WindowState = FormWindowState.Minimized;
+                WindowState = FormWindowState.Minimized;
+                Visible =false;
             }
         }
 
@@ -279,8 +287,11 @@ namespace DropDownloader
                         {
                             if (!(bool)jobject["alerta"])
                             {
-                                if (!automatic) this.            WindowState = FormWindowState.Minimized;Visible=false;
-                                ShowInTaskbar = true;
+                                if (!automatic) try
+                                    {
+                                        this.WindowState = FormWindowState.Minimized; Visible = false;
+                                    }
+                                    catch { } ShowInTaskbar = true;
                                 notifyIcon1.Visible = true;
                                 notifyIcon1.Text = "Pro Arte Sync";
                                 logado = true;
@@ -289,8 +300,12 @@ namespace DropDownloader
                             else
                             {
                                 MessageBox.Show("Alerta : " + jobject["mensagem"]["mensagem"].ToString(), jobject["mensagem"]["titulo"].ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                if (!automatic) this.            WindowState = FormWindowState.Minimized;Visible=false;
-                                ShowInTaskbar = true;
+                                if (!automatic) try
+                                    {
+                                        this.WindowState = FormWindowState.Minimized; Visible = false;
+                                    }
+                                    catch { }
+                                ShowInTaskbar = true; ShowInTaskbar = true;
                                 notifyIcon1.Visible = true;
                                 notifyIcon1.Text = "Logado";
                                 notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.atualizado.GetHicon());
@@ -300,10 +315,14 @@ namespace DropDownloader
                             notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
                             notifyIcon1.BalloonTipText = "Logado com sucesso";
                             notifyIcon1.BalloonTipTitle = this.Text;
-                            notifyIcon1.ShowBalloonTip(1000);
-                            f1_VisibleChanged(null, null);
-                            this.            WindowState = FormWindowState.Minimized;Visible=false;
-                            Visible = false;
+                            if (Properties.Settings.Default.Notification) if (Properties.Settings.Default.Notification)notifyIcon1.ShowBalloonTip(1000);
+                           
+                            ShowInTaskbar = true;
+                            f1_VisibleChanged(null, null); try
+                            {
+                                this.WindowState = FormWindowState.Minimized; Visible = false;
+                            }
+                            catch { }
                             /* Thread td = new Thread(UpdateFilesAsync);
                              td.Start();*/
                         }
@@ -333,8 +352,11 @@ namespace DropDownloader
 
 
                     }
-                    this.            WindowState = FormWindowState.Minimized;Visible=false;
-                    Visible = false;
+                     try
+                    {
+                        this.WindowState = FormWindowState.Minimized; Visible = false;
+                    }
+                    catch { }
                 }
                 else if (dbx == null) MessageBox.Show("Erro ao conectar com servidor de sincronia", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else MessageBox.Show("Preencha todos os campos", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -382,7 +404,7 @@ namespace DropDownloader
                     notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
                     notifyIcon1.BalloonTipText = "Falha ao se conectar ao servidor de arquivos, tentando novamente em 1 minuto";
                     notifyIcon1.BalloonTipTitle = this.Text;
-                    notifyIcon1.ShowBalloonTip(1500);
+                    if (Properties.Settings.Default.Notification)notifyIcon1.ShowBalloonTip(1500);
                 
             }
         }
@@ -416,8 +438,19 @@ namespace DropDownloader
 
          async void UpdateFilesAsync(object sender, EventArgs e)
         {
-           
-                if (this.Visible) this.            WindowState = FormWindowState.Minimized;Visible=false;
+
+            if (this.Visible)
+            {
+                try
+                {
+                    WindowState = FormWindowState.Minimized;
+                    Visible = false;
+                }
+                catch
+                {
+
+                }
+            }
                 if (dbx == null)
                 {
                     login();
@@ -433,7 +466,7 @@ namespace DropDownloader
                         notifyIcon1.BalloonTipText = "Atualizando arquivos...";
 
                         notifyIcon1.BalloonTipTitle = this.Text;
-                        if (checkBox1.Checked) notifyIcon1.ShowBalloonTip(1000);
+                        if (checkBox1.Checked) if (Properties.Settings.Default.Notification)notifyIcon1.ShowBalloonTip(1000);
                         JObject jobject = null;
 
                         syncpath = Properties.Settings.Default.Folder;
@@ -444,8 +477,15 @@ namespace DropDownloader
                         if ((bool)jobject["sucesso"] == true)
                         {
                         //   if (this.Visible) this.            WindowState = FormWindowState.Minimized;Visible=false;
-                            this.            WindowState = FormWindowState.Minimized;Visible=false;
+                        try
+                        {
+                            this.WindowState = FormWindowState.Minimized; Visible = false;
                             Visible = false;
+                        }
+                        catch
+                        {
+
+                        }
                             syncerrs = 0;
                             Properties.Settings.Default.acesso = jobject["acesso"].ToString();
                             Properties.Settings.Default.Save();
@@ -454,16 +494,40 @@ namespace DropDownloader
                             JArray lista = (JArray)jobject["lista"];
                             JToken controle = jobject["controle"];
                             firstget = true;
-                            pastascontrol = controle.ToString();
+                        try {
+                            if ((int)jobject["estilo"] != Properties.Settings.Default.estilo)
+                            { 
+                                Properties.Settings.Default.estilo = (int)jobject["estilo"];
+                                Properties.Settings.Default.Save();
+                                clearFolder(Properties.Settings.Default.Folder);
+                                comboBox1.SelectedIndexChanged -= ComboBox1_SelectedIndexChanged;
+                                comboBox1.SelectedIndex = Properties.Settings.Default.estilo;
+                                comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
+
+                            }
+                           
+                        }
+                        catch
+                        {
+
+                        }
+                        pastascontrol = controle.ToString();
                             for (int i = 0; i < lista.Count; i++)
                             {
-                                notifyIcon1.Text = "Atualizando arquivos ";
 
                                 if (!logado) break;
                                 try
                                 {
                                     DateTime now = DateTime.Now;
                                     lista[i]["origem"] = "/" + lista[i]["origem"].ToString().Replace("%dia%", now.Day > 9 ? now.Day.ToString() : "0" + now.Day).Replace("%mes%", now.Month > 9 ? now.Month.ToString() : "0" + now.Month).Replace("%ano%", now.Year.ToString());
+                                try
+                                {
+                                    notifyIcon1.Text = "Analisando: " + lista[i]["origem"].ToString().Split('/')[lista[i]["origem"].ToString().Split('/').Length - 1];
+                                }
+                                catch
+                                {
+
+                                }
                                     Console.WriteLine("MEU CAMINHO " + lista[i]["origem"]);
                                     if (f1.prefpastas == null || Pastapref.candonwload(prefpastas, lista[i]["origem"].ToString()))
                                     {
@@ -504,7 +568,15 @@ namespace DropDownloader
                                         }
 
                                         isdownloading = true;
-                                        using (var file = dbx.Files.DownloadAsync(lista[i]["origem"].ToString()).Result)
+                                    try
+                                    {
+                                        notifyIcon1.Text = "Baixando: " + lista[i]["origem"].ToString().Split('/')[lista[i]["origem"].ToString().Split('/').Length - 1];
+                                    }
+                                    catch
+                                    {
+
+                                    }
+                                    using (var file = dbx.Files.DownloadAsync(lista[i]["origem"].ToString()).Result)
                                         {
                                             using (var files = await file.GetContentAsStreamAsync())
                                             {
@@ -680,7 +752,7 @@ namespace DropDownloader
                         notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
                         notifyIcon1.BalloonTipText = "Todos os arquivos foram atualizados com sucesso";
                         notifyIcon1.BalloonTipTitle = this.Text;
-                        if (receberNotificaçõesToolStripMenuItem.Checked) notifyIcon1.ShowBalloonTip(1000);
+                        if (receberNotificaçõesToolStripMenuItem.Checked) if (Properties.Settings.Default.Notification)notifyIcon1.ShowBalloonTip(1000);
 
                     }
                     catch (Exception ex)
@@ -692,7 +764,7 @@ namespace DropDownloader
                             notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
                             notifyIcon1.BalloonTipText = "Ocorreram " + syncerrs + " ao sincronizar com o servidor";
                             notifyIcon1.BalloonTipTitle = this.Text;
-                            notifyIcon1.ShowBalloonTip(1000);
+                            if (Properties.Settings.Default.Notification)notifyIcon1.ShowBalloonTip(1000);
                         }
                         //  MessageBox.Show("Erro de conexão: " + jobject["mensagem"]["mensagem"].ToString(), jobject["mensagem"]["titulo"].ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -707,11 +779,11 @@ namespace DropDownloader
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
             updatecont++;
-            if (updatecont>10)
-            {
-                Process.GetCurrentProcess().Kill();
+            //if//(updatecont>10)
+           // {
+///Process.GetCurrentProcess().Kill();
 
-            }
+          //  }
 
 
 
@@ -737,7 +809,7 @@ namespace DropDownloader
             {
                 /* Thread td = new Thread(UpdateFilesAsync);
                  td.Start();*/
-                updater.CancelAsync();
+                //updater.CancelAsync();
                 updater.RunWorkerAsync();
 
             }
@@ -782,7 +854,7 @@ namespace DropDownloader
                     button4.Enabled = true;
                     textBox1.Text = Properties.Settings.Default.User;
                     button1.Text = "Desconectar";
-
+                    comboBox1.Enabled = true;
                 }
                 else
                 {
@@ -796,6 +868,7 @@ namespace DropDownloader
                     button3.Enabled = false;
                     button4.Enabled = false;
                     button1.Text = "Conectar";
+                    comboBox1.Enabled = false;
                 }
             }
         }
@@ -1157,7 +1230,7 @@ namespace DropDownloader
                   {
                     /* Thread td = new Thread(UpdateFilesAsync);
                      td.Start();*/
-                    updater.CancelAsync();
+                   // updater.CancelAsync();
                       updater.RunWorkerAsync();
 
                   }
@@ -1177,18 +1250,19 @@ namespace DropDownloader
                 {
                     notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Ícone.GetHicon());
                      await Task.Delay(1000);
+                    gambierros++;
                     //doLoop(sender,e);
                 }
                 else if (!filessync)
                 {
                     if (isdownloading)
                     {
-                        notifyIcon1.Text = "Baixando Arquivos";
+                        //notifyIcon1.Text = "Baixando Arquivos";
                         notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.baixando.GetHicon());
                     }
                     else
                     {
-                        notifyIcon1.Text = "Procurando novos arquivos";
+                        //notifyIcon1.Text = "Procurando novos arquivos";
                         notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Procurando.GetHicon());
                     }
                     await Task.Delay(1000);
@@ -1217,8 +1291,47 @@ namespace DropDownloader
             GC.WaitForPendingFinalizers();
             GC.Collect();
             GC.WaitForPendingFinalizers();
+            gambierros++;
+
         }
         ulong oldgambi,gambierros;
+
+        private void updateBOX()
+        {
+            WebClient http = new WebClient();
+            try
+            {
+                string r = http.DownloadString(String.Format("http://crm.conteudoproarte.com.br/!/estilos/?acao=estilo&cliente={0}&senha={1}&estilo={2}", Properties.Settings.Default.User, Properties.Settings.Default.Pass, comboBox1.SelectedIndex));
+
+                JObject resu = JObject.Parse(r);
+                Console.WriteLine(resu);
+                if((bool)resu["success"])
+                {
+                    MessageBox.Show(resu["msg"].ToString(), resu["titulo"].ToString(), MessageBoxButtons.OK, MessageBoxIcon.None);
+                    Properties.Settings.Default.estilo = comboBox1.SelectedIndex;
+                    Properties.Settings.Default.Save();
+                    updater.CancelAsync();
+
+                    clearFolder(Properties.Settings.Default.Folder);
+                    prefpastas = null;
+                    if (System.IO.File.Exists(pastapath)) System.IO.File.Delete(pastapath);
+                    updater.RunWorkerAsync();
+                } else
+                {
+                    int crtl = comboBox1.SelectedIndex == 0 ? 1 : 0;
+                    MessageBox.Show(resu["msg"].ToString(), resu["titulo"].ToString(), MessageBoxButtons.OK, MessageBoxIcon.None);
+                    //comboBox1.SelectedIndex = crtl;
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("error meu " + ex);
+                int crtl = comboBox1.SelectedIndex == 0 ? 1 : 0;
+                MessageBox.Show("Error","Falha ao se conectar ao servidor", MessageBoxButtons.OK, MessageBoxIcon.None);
+                //comboBox1.SelectedIndex = crtl;
+            }
+        }
+
         private void timer5_Tick(object sender, EventArgs e)
         {
             if (System.IO.File.Exists(timedebugpath)) System.IO.File.Delete(timedebugpath);
@@ -1236,7 +1349,7 @@ namespace DropDownloader
                 {
                     gambierros++;
                 }
-                if (gambierros > 30)
+                if (gambierros > 30&&!filessync)
                 {
                     Process.GetCurrentProcess().Kill();
                 }
@@ -1257,7 +1370,31 @@ namespace DropDownloader
             shortcut.IconLocation = iconpath;
             shortcut.Save();
         }
-        
+        private void clearFolder(string FolderName)
+        {
+            System.IO.DirectoryInfo di = new DirectoryInfo(FolderName);
+
+            foreach (FileInfo file in di.EnumerateFiles())
+            {
+                try
+                {
+                    file.Delete();
+                }
+                catch
+                {
+
+                }
+            }
+            foreach (DirectoryInfo dir in di.EnumerateDirectories())
+            {
+                try { dir.Delete(true); }
+                catch
+                {
+
+                }
+            }
+        }
+
     }
     
 }

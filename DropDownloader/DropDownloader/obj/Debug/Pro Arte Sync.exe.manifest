@@ -4,7 +4,7 @@
   <description asmv2:iconFile="icon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Pro Arte Sync" version="1.0.0.47" publicKeyToken="35929E045CEC078E" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="Pro Arte Sync" version="1.0.0.52" publicKeyToken="35929E045CEC078E" language="neutral" processorArchitecture="msil" />
     <commandLine file="Pro Arte Sync.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Pro Arte Sync.exe" size="1436744">
-      <assemblyIdentity name="Pro Arte Sync" version="1.0.0.47" publicKeyToken="35929E045CEC078E" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Pro Arte Sync.exe" size="1440840">
+      <assemblyIdentity name="Pro Arte Sync" version="1.0.0.52" publicKeyToken="35929E045CEC078E" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>55BmUjLKB1sNUjL7LRHrxMa4J4Y1Dq3OprpkLg9t/wo=</dsig:DigestValue>
+        <dsig:DigestValue>gT81F6hkKz1GTfXc1QJvBuZWUiganMWTtP5MsGydCyQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -96,13 +96,13 @@
       <dsig:DigestValue>oT7KE120gfphUir2GYjcz7i6+e3QIlyCC8rau8DaOjc=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Pro Arte Sync.exe.config" size="1849">
+  <file name="Pro Arte Sync.exe.config" size="1909">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>j0OQ9flOY0aAKAzFVX9y/FimKpSP9o2N6cgh9PCora0=</dsig:DigestValue>
+      <dsig:DigestValue>HYzyVejul3CertFWXjFDk9/W2weodYV8iNZhl5Mvw+0=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
