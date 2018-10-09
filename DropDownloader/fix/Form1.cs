@@ -99,6 +99,8 @@ namespace fix
                         try
                         {
                             Process.GetProcessesByName("Pro Arte Sync")[0].Kill();
+                            Program.RefreshTrayArea();
+
                         }
                         catch
                         {

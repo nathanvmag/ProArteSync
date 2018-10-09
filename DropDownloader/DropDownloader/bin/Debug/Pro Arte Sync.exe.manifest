@@ -4,7 +4,7 @@
   <description asmv2:iconFile="icon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Pro Arte Sync" version="1.0.0.52" publicKeyToken="35929E045CEC078E" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="Pro Arte Sync" version="1.0.0.57" publicKeyToken="35929E045CEC078E" language="neutral" processorArchitecture="msil" />
     <commandLine file="Pro Arte Sync.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Pro Arte Sync.exe" size="1440840">
-      <assemblyIdentity name="Pro Arte Sync" version="1.0.0.52" publicKeyToken="35929E045CEC078E" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Pro Arte Sync.exe" size="1439816">
+      <assemblyIdentity name="Pro Arte Sync" version="1.0.0.57" publicKeyToken="35929E045CEC078E" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>gT81F6hkKz1GTfXc1QJvBuZWUiganMWTtP5MsGydCyQ=</dsig:DigestValue>
+        <dsig:DigestValue>aypQY7FxYwpfaVXfCw+2+AuN2fYVeU6Asrjw4mxZcDg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

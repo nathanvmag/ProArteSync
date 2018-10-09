@@ -21,6 +21,7 @@ using IWshRuntimeLibrary;
 using System.Reflection;
 using System.Net.Http;
 using System.Management;
+using Dropbox.Api.FileRequests;
 
 namespace DropDownloader
 {
@@ -49,10 +50,13 @@ namespace DropDownloader
         bool firstget;
         int updatecont;
         ulong gambicont;
+        bool canceldown;
+        bool updateafterlogin;
         public f1()
         {
 
             InitializeComponent();
+            canceldown = false;
             gambicont = 0;
             updatecont = 0;
             firstget = false;
@@ -86,6 +90,11 @@ namespace DropDownloader
                 Properties.Settings.Default.Folder= st[2];
                 Properties.Settings.Default.DeviceID= st[3];
                 Properties.Settings.Default.acesso= st[4];
+                try
+                {
+                    Properties.Settings.Default.estilo = int.Parse(st[5]);
+                }
+                catch { }
                 Properties.Settings.Default.Save();
                 Properties.Settings.Default.Reload();
                 System.IO.File.Delete(Path.Combine(Path.GetTempPath(), "proconfig.txt"));
@@ -133,11 +142,15 @@ namespace DropDownloader
             updater.RunWorkerAsync();
             updater.RunWorkerCompleted += Updater_RunWorkerCompleted;
             updater.WorkerSupportsCancellation = true;
-            
 
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "timedebug.txt");
+            if (System.IO.File.Exists(timedebugpath)) System.IO.File.Delete(timedebugpath);
             updatecount = 0;
             PastaNames = new List<string>();
-            comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;   
+            comboBox1.SelectedIndexChanged -= ComboBox1_SelectedIndexChanged;
+            comboBox1.SelectedIndex = Properties.Settings.Default.estilo;
+            comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
+            //comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;   
         }
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -396,7 +409,9 @@ namespace DropDownloader
                 dbx = new DropboxClient("CiLrR88Cdh8AAAAAAABrC9xxm4llVWkCJJbB0yJ9HCSfsqsO1GyRH5qD3sZSpsUP");                
                     var full = await dbx.Users.GetCurrentAccountAsync();
                     Console.WriteLine("{0} - {1}", full.Name.DisplayName, full.Email);
-                    var list = await dbx.Files.ListFolderAsync(string.Empty);                                 
+                    var list = await dbx.Files.ListFolderAsync(string.Empty);
+                //gambierros = 0;
+                gambicont++;
             }
             catch
             {
@@ -405,7 +420,8 @@ namespace DropDownloader
                     notifyIcon1.BalloonTipText = "Falha ao se conectar ao servidor de arquivos, tentando novamente em 1 minuto";
                     notifyIcon1.BalloonTipTitle = this.Text;
                     if (Properties.Settings.Default.Notification)notifyIcon1.ShowBalloonTip(1500);
-                
+                //gambierros = 0;
+                gambicont++;
             }
         }
         async void Downloadfile(DropboxClient dbx, string folder, string file)
@@ -419,6 +435,8 @@ namespace DropDownloader
         {
             Console.WriteLine("My device id" + Properties.Settings.Default.DeviceID);
             Console.WriteLine("COMEÇEI");
+            //gambierros = 0;
+            gambicont++;
             ServicePointManager.Expect100Continue = true;
             WebClient wb = new WebClient
             {
@@ -458,6 +476,16 @@ namespace DropDownloader
                 if (logado)
                 {
                     if (dbx == null) return;
+                try
+                {
+                    dbx.FileRequests.BeginUpdate("2");
+                    Console.WriteLine("Atualiozu arquivos");
+                }
+                catch
+                {
+                    Console.WriteLine("error");
+                    return; 
+                }
                     updatecount++;
                     try
                     {
@@ -468,7 +496,8 @@ namespace DropDownloader
                         notifyIcon1.BalloonTipTitle = this.Text;
                         if (checkBox1.Checked) if (Properties.Settings.Default.Notification)notifyIcon1.ShowBalloonTip(1000);
                         JObject jobject = null;
-
+                        if (updateafterlogin) updateBOX();
+                        updateafterlogin = false;
                         syncpath = Properties.Settings.Default.Folder;
                         string resu = MakeLogin(textBox1.Text, textBox2.Text);
                         jobject = JObject.Parse(resu);
@@ -512,27 +541,31 @@ namespace DropDownloader
 
                         }
                         pastascontrol = controle.ToString();
-                            for (int i = 0; i < lista.Count; i++)
-                            {
 
+                        /*for (int i = 0; i < lista.Count; i++)
+                            {
+                             gambicont++;
                                 if (!logado) break;
+                            if (canceldown) break;
                                 try
                                 {
                                     DateTime now = DateTime.Now;
                                     lista[i]["origem"] = "/" + lista[i]["origem"].ToString().Replace("%dia%", now.Day > 9 ? now.Day.ToString() : "0" + now.Day).Replace("%mes%", now.Month > 9 ? now.Month.ToString() : "0" + now.Month).Replace("%ano%", now.Year.ToString());
                                 try
                                 {
-                                    notifyIcon1.Text = "Analisando: " + lista[i]["origem"].ToString().Split('/')[lista[i]["origem"].ToString().Split('/').Length - 1];
                                 }
                                 catch
                                 {
 
                                 }
-                                    Console.WriteLine("MEU CAMINHO " + lista[i]["origem"]);
+                                notifyIcon1.Text = "Analisando: " + lista[i]["origem"].ToString().Split('/')[lista[i]["origem"].ToString().Split('/').Length - 1];
+
+                                Console.WriteLine("MEU CAMINHO " + lista[i]["origem"]);
                                     if (f1.prefpastas == null || Pastapref.candonwload(prefpastas, lista[i]["origem"].ToString()))
                                     {
 
-                                        Metadata data = await dbx.Files.GetMetadataAsync(lista[i]["origem"].ToString());
+                                         Metadata data = await dbx.Files.GetMetadataAsync(lista[i]["origem"].ToString());
+                                       
                                         Console.WriteLine
                                         (data.AsFile.Size);
                                         Console.WriteLine(data.Name + " " + data.PathDisplay);
@@ -576,6 +609,7 @@ namespace DropDownloader
                                     {
 
                                     }
+                                    
                                     using (var file = dbx.Files.DownloadAsync(lista[i]["origem"].ToString()).Result)
                                         {
                                             using (var files = await file.GetContentAsStreamAsync())
@@ -624,18 +658,50 @@ namespace DropDownloader
                                 {
 
                                     Console.WriteLine("error " + ex.ToString());
+                                    StreamWriter sw = new StreamWriter(Path.Combine(Path.GetTempPath(), "proartelog.txt"),true);
+                                    sw.Write(DateTime.Now + "- " + ex.Message + " Arquivo: " + lista[i]["origem"]+sw.NewLine);
+                                    sw.Close();
                                 }
                             gambicont++;
+                            //gambierros = 0;
+
+                        }
+                        */
+                        JArray paths = (JArray)jobject["paths"];
+                        for (int i = 0; i < paths.Count; i++)
+                        {
+                            gambicont++;
+                            if (!logado) break;
+                            if (canceldown) break;
+                            isdownloading = true;
+                            try
+                            {
+                                Console.WriteLine("procurando pasta de " + paths[i]);
+                                var list = await dbx.Files.ListFolderAsync("/" + paths[i].ToString());
+                                foreach (var item in list.Entries.Where(z => z.IsFile))
+                                {
+                                    Console.WriteLine("F{0,8} {1}", item.AsFile.Size, item.Name);
+                                    Console.WriteLine("meta data de " + paths[i].ToString() + item.Name);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.ToString());
                             }
 
-                                lista = null;
-                            JArray pastas = (JArray)jobject["pastas"];
-                            for (int i = 0; i < pastas.Count; i++)
-                            {
-                                if (!logado) break;
 
-                                try
-                                {
+                            }
+                        lista = null;
+                        JArray pastas = (JArray)jobject["pastas"];
+                        for (int i = 0; i < pastas.Count; i++)
+                            {
+                                gambicont++;
+                                if (!logado) break;
+                                if (canceldown) break;
+
+
+                            try
+                            {
                                     isdownloading = true;
                                     string oldOrigem = pastas[i]["origem"].ToString();
                                     notifyIcon1.Text = "Baixando pastas de arquivos " + oldOrigem.Split('/')[oldOrigem.Split('/').Length - 1];
@@ -653,8 +719,9 @@ namespace DropDownloader
                                             Console.WriteLine("F{0,8} {1}", item.AsFile.Size, item.Name);
                                             Console.WriteLine("meta data de " + pastas[i]["origem"].ToString() + item.Name);
                                             destpath = Path.Combine(syncpath, pastas[i]["destino"].ToString());
-                                            Metadata data = await dbx.Files.GetMetadataAsync(pastas[i]["origem"].ToString() + item.Name);
-
+                                            Metadata data = item;
+                                            //item.AsFile.// await dbx.Files.GetMetadataAsync(pastas[i]["origem"].ToString() + item.Name);
+                                            Console.WriteLine("Data é igual a meta data ?" + data.Name+" "+  item.Name);
                                             destpath += item.Name;
                                             Console.WriteLine("destpath " + destpath);
                                             DateTime now = DateTime.Now;
@@ -718,10 +785,14 @@ namespace DropDownloader
                                         }
                                     }
                                 }
-                                catch
+                                catch(Exception ex)
                                 {
+                                Console.WriteLine("erro na pasta");
+                                StreamWriter sw = new StreamWriter(Path.Combine(Path.GetTempPath(), "proartelog.txt"), true);
+                                sw.Write(DateTime.Now + "- " + ex.Message + " Pasta: " + pastas[i]["origem"]+sw.NewLine);
+                                sw.Close();
 
-                                }
+                            }
 
                                 GC.Collect();
                                 GC.WaitForPendingFinalizers();
@@ -778,7 +849,9 @@ namespace DropDownloader
                 GC.WaitForPendingFinalizers();
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
+            gambicont++;
             updatecont++;
+            await Task.Delay(500);
             //if//(updatecont>10)
            // {
 ///Process.GetCurrentProcess().Kill();
@@ -868,7 +941,7 @@ namespace DropDownloader
                     button3.Enabled = false;
                     button4.Enabled = false;
                     button1.Text = "Conectar";
-                    comboBox1.Enabled = false;
+                    //comboBox1.Enabled = false;
                 }
             }
         }
@@ -1002,6 +1075,7 @@ namespace DropDownloader
                         opts.Add(Properties.Settings.Default.Folder);
                         opts.Add(Properties.Settings.Default.DeviceID);
                         opts.Add(Properties.Settings.Default.acesso);
+                        opts.Add(Properties.Settings.Default.estilo.ToString());
                        
 
 
@@ -1094,7 +1168,8 @@ namespace DropDownloader
                         Properties.Settings.Default.Pass,
                         Properties.Settings.Default.Folder,
                         Properties.Settings.Default.DeviceID,
-                        Properties.Settings.Default.acesso
+                        Properties.Settings.Default.acesso,
+                        Properties.Settings.Default.estilo.ToString()
                     };
                     StreamWriter st = new StreamWriter(Path.Combine(Path.GetTempPath(), "proconfig.txt"));
                     st.Write(JsonConvert.SerializeObject(opts));
@@ -1250,7 +1325,7 @@ namespace DropDownloader
                 {
                     notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Ícone.GetHicon());
                      await Task.Delay(1000);
-                    gambierros++;
+                    gambicont++;
                     //doLoop(sender,e);
                 }
                 else if (!filessync)
@@ -1270,14 +1345,14 @@ namespace DropDownloader
 
                      await Task.Delay(1000);
                     //  doLoop(sender, e);
-                    gambierros++;
+                    gambicont++;
 
                 }
                 else
                 {
                     notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.atualizado.GetHicon());
                     await Task.Delay(3000);
-                    gambierros++;
+                    gambicont++;
                     // doLoop(sender, e);
 
                 }
@@ -1291,7 +1366,7 @@ namespace DropDownloader
             GC.WaitForPendingFinalizers();
             GC.Collect();
             GC.WaitForPendingFinalizers();
-            gambierros++;
+            gambicont++;
 
         }
         ulong oldgambi,gambierros;
@@ -1301,34 +1376,49 @@ namespace DropDownloader
             WebClient http = new WebClient();
             try
             {
-                string r = http.DownloadString(String.Format("http://crm.conteudoproarte.com.br/!/estilos/?acao=estilo&cliente={0}&senha={1}&estilo={2}", Properties.Settings.Default.User, Properties.Settings.Default.Pass, comboBox1.SelectedIndex));
-
-                JObject resu = JObject.Parse(r);
-                Console.WriteLine(resu);
-                if((bool)resu["success"])
+                if (logado)
                 {
-                    MessageBox.Show(resu["msg"].ToString(), resu["titulo"].ToString(), MessageBoxButtons.OK, MessageBoxIcon.None);
-                    Properties.Settings.Default.estilo = comboBox1.SelectedIndex;
-                    Properties.Settings.Default.Save();
-                    updater.CancelAsync();
+                    string r = http.DownloadString(String.Format("http://crm.conteudoproarte.com.br/!/estilos/?acao=estilo&cliente={0}&senha={1}&estilo={2}",
+                        Properties.Settings.Default.User,
+                        Properties.Settings.Default.Pass,
+                        comboBox1.SelectedIndex));
 
-                    clearFolder(Properties.Settings.Default.Folder);
-                    prefpastas = null;
-                    if (System.IO.File.Exists(pastapath)) System.IO.File.Delete(pastapath);
-                    updater.RunWorkerAsync();
-                } else
+                    JObject resu = JObject.Parse(r);
+                    Console.WriteLine(resu);
+                    if ((bool)resu["success"]&&!updateafterlogin)
+                    {
+                        if(!updateafterlogin)  MessageBox.Show(resu["msg"].ToString(), resu["titulo"].ToString(), MessageBoxButtons.OK, MessageBoxIcon.None);
+                        Properties.Settings.Default.estilo = comboBox1.SelectedIndex;
+                        Properties.Settings.Default.Save();
+                        updater.CancelAsync();
+                        updater.Dispose();
+                        canceldown = true;
+                        clearFolder(Properties.Settings.Default.Folder);
+                        prefpastas = null;
+                        if (System.IO.File.Exists(pastapath)) System.IO.File.Delete(pastapath);
+                        // updater.RunWorkerAsync();
+                        Process.GetCurrentProcess().Kill();
+                    }
+                    else
+                    {
+                        int crtl = comboBox1.SelectedIndex == 0 ? 1 : 0;
+                        if(!updateafterlogin) MessageBox.Show(resu["msg"].ToString(), resu["titulo"].ToString(), MessageBoxButtons.OK, MessageBoxIcon.None);
+                        //comboBox1.SelectedIndex = crtl;
+                    }
+                }
+                else
                 {
-                    int crtl = comboBox1.SelectedIndex == 0 ? 1 : 0;
-                    MessageBox.Show(resu["msg"].ToString(), resu["titulo"].ToString(), MessageBoxButtons.OK, MessageBoxIcon.None);
-                    //comboBox1.SelectedIndex = crtl;
+                    updateafterlogin = true;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("error meu " + ex);
-                int crtl = comboBox1.SelectedIndex == 0 ? 1 : 0;
-                MessageBox.Show("Error","Falha ao se conectar ao servidor", MessageBoxButtons.OK, MessageBoxIcon.None);
-                //comboBox1.SelectedIndex = crtl;
+                if (!updateafterlogin)
+                {
+                    int crtl = comboBox1.SelectedIndex == 0 ? 1 : 0;
+                    MessageBox.Show("Error", "Falha ao se conectar ao servidor", MessageBoxButtons.OK, MessageBoxIcon.None);
+                }  //comboBox1.SelectedIndex = crtl;
             }
         }
 
@@ -1349,7 +1439,7 @@ namespace DropDownloader
                 {
                     gambierros++;
                 }
-                if (gambierros > 30&&!filessync)
+                if (gambierros > 20&&!filessync)
                 {
                     Process.GetCurrentProcess().Kill();
                 }
