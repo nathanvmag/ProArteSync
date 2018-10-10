@@ -52,6 +52,8 @@ namespace DropDownloader
         ulong gambicont;
         bool canceldown;
         bool updateafterlogin;
+        bool freezed;
+        private string APIDROP;
         public f1()
         {
 
@@ -60,6 +62,7 @@ namespace DropDownloader
             gambicont = 0;
             updatecont = 0;
             firstget = false;
+            freezed = false;
             pastapath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "pastapref.txt");
             timedebugpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "timedebug.txt");
             Console.WriteLine(Process.GetCurrentProcess().ProcessName);
@@ -100,7 +103,7 @@ namespace DropDownloader
                 System.IO.File.Delete(Path.Combine(Path.GetTempPath(), "proconfig.txt"));
                 Visible = false;
             }
-            login();
+            //login();
             iconpath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + @"\foldericon.ico";
             filessync = true;
             isdownloading = false;
@@ -240,12 +243,8 @@ namespace DropDownloader
         {
             if (!logado) { 
             int counter = 0;
-            while (dbx == null && counter < 3)
-            {
-                login();
-                counter++;
-            }
-            if (!string.IsNullOrEmpty(textBox3.Text) && dbx != null)
+           
+            if (!string.IsNullOrEmpty(textBox3.Text) )
             {
                     JObject jobject = null;
                     try
@@ -298,8 +297,17 @@ namespace DropDownloader
 
                         if ((bool)jobject["sucesso"] == true)
                         {
+                            APIDROP = jobject["api"].ToString();
+
+                            login();
+                            while (dbx == null && counter < 3)
+                            {
+                                login();
+                                counter++;
+                            }
                             if (!(bool)jobject["alerta"])
                             {
+                               
                                 if (!automatic) try
                                     {
                                         this.WindowState = FormWindowState.Minimized; Visible = false;
@@ -371,7 +379,7 @@ namespace DropDownloader
                     }
                     catch { }
                 }
-                else if (dbx == null) MessageBox.Show("Erro ao conectar com servidor de sincronia", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    else if (dbx == null) MessageBox.Show("Erro ao conectar com servidor de sincronia", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else MessageBox.Show("Preencha todos os campos", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //automatic = false;
                 
@@ -405,17 +413,21 @@ namespace DropDownloader
         async void login()
         {
             try
+                
             {
-                dbx = new DropboxClient("CiLrR88Cdh8AAAAAAABrC9xxm4llVWkCJJbB0yJ9HCSfsqsO1GyRH5qD3sZSpsUP");                
+                if (!string.IsNullOrEmpty(APIDROP))
+                {
+                    dbx = new DropboxClient(APIDROP);
                     var full = await dbx.Users.GetCurrentAccountAsync();
                     Console.WriteLine("{0} - {1}", full.Name.DisplayName, full.Email);
                     var list = await dbx.Files.ListFolderAsync(string.Empty);
-                //gambierros = 0;
-                gambicont++;
+                    //gambierros = 0;
+                    gambicont++;
+                }
             }
-            catch
+            catch (Exception e)
             {
-               
+                Console.WriteLine(e.ToString());
                     notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
                     notifyIcon1.BalloonTipText = "Falha ao se conectar ao servidor de arquivos, tentando novamente em 1 minuto";
                     notifyIcon1.BalloonTipTitle = this.Text;
@@ -451,6 +463,7 @@ namespace DropDownloader
             byte[] responsebytes = wb.UploadValues(site, "POST", reqparm);
             string responsebody = Encoding.UTF8.GetString(responsebytes);
             Console.WriteLine("resultado é " + responsebody);
+           
             return responsebody;
         }
 
@@ -469,13 +482,10 @@ namespace DropDownloader
 
                 }
             }
-                if (dbx == null)
-                {
-                    login();
-                }
+               
                 if (logado)
                 {
-                    if (dbx == null) return;
+                    //if (dbx == null) return;
                 try
                 {
                     dbx.FileRequests.BeginUpdate("2");
@@ -505,6 +515,12 @@ namespace DropDownloader
 
                         if ((bool)jobject["sucesso"] == true)
                         {
+                            APIDROP = jobject["api"].ToString();
+
+                        if (dbx == null)
+                        {
+                            login();
+                        }
                         //   if (this.Visible) this.            WindowState = FormWindowState.Minimized;Visible=false;
                         try
                         {
@@ -668,7 +684,8 @@ namespace DropDownloader
                         }
                         */
                         JArray paths = (JArray)jobject["paths"];
-                        for (int i = 0; i < paths.Count; i++)
+                        DateTime now = DateTime.Now;
+                        for (int z = 0;z < paths.Count; z++)
                         {
                             gambicont++;
                             if (!logado) break;
@@ -676,21 +693,167 @@ namespace DropDownloader
                             isdownloading = true;
                             try
                             {
-                                Console.WriteLine("procurando pasta de " + paths[i]);
-                                var list = await dbx.Files.ListFolderAsync("/" + paths[i].ToString());
-                                foreach (var item in list.Entries.Where(z => z.IsFile))
+                                Console.WriteLine("procurando pasta de " + paths[z]);
+                                var list = await dbx.Files.ListFolderAsync("/" + paths[z].ToString());
+                                foreach (var item in list.Entries.Where(dz => dz.IsFile))
                                 {
                                     Console.WriteLine("F{0,8} {1}", item.AsFile.Size, item.Name);
-                                    Console.WriteLine("meta data de " + paths[i].ToString() + item.Name);
+                                    Console.WriteLine("meta data de " + paths[z].ToString() +"/"+ item.Name);
+                                    for (int i = 0; i < lista.Count; i++)
+                                    {
+                                        try
+                                        {
+                                            string templ = "/" + lista[i]["origem"].ToString().Replace("%dia%", now.Day > 9 ? now.Day.ToString() : "0" + now.Day).Replace("%mes%", now.Month > 9 ? now.Month.ToString() : "0" + now.Month).Replace("%ano%", now.Year.ToString());
+                                            if (templ.Contains(paths[z].ToString() + "/" + item.Name))
+                                            {
+                                                Console.WriteLine("Do download" + templ);
+                                                if (f1.prefpastas == null || Pastapref.candonwload(prefpastas, templ.ToString()))
+                                                {
+
+                                                    Metadata data = item;
+                                                    Console.WriteLine
+                                                    (data.AsFile.Size);
+                                                    Console.WriteLine(data.Name + " " + data.PathDisplay);
+                                                    string destpath = Path.Combine(syncpath, lista[i]["destino"].ToString());
+                                                    if (lista[i]["excluir"] != null)
+                                                    {
+                                                        string toRemove = Path.Combine(syncpath, lista[i]["excluir"].ToString());
+                                                        if (System.IO.File.Exists(toRemove)) System.IO.File.Delete(toRemove);
+
+                                                    }
+                                                    string where = lista[i]["destino"].ToString();
+                                                    destpath = destpath.Replace("_%dia%-%mes%-%ano%", "");
+                                                    if (System.IO.File.Exists(destpath))
+                                                    {
+                                                        DateTime lastwrite = System.IO.File.GetLastWriteTime(destpath);
+                                                        if (lastwrite.Date != now.Date)
+                                                        {
+                                                            System.IO.File.Delete(destpath);
+                                                        }
+                                                        else
+                                                        {
+                                                            Console.WriteLine(new FileInfo(destpath).Length + "   " + data.AsFile.Size);
+                                                            if (((ulong)new FileInfo(destpath).Length == data.AsFile.Size))
+                                                            {
+                                                                Console.WriteLine("É de hoje");
+                                                                continue;
+                                                            }
+                                                            else System.IO.File.Delete(destpath);
+
+                                                        }
+
+
+                                                    }
+
+                                                    isdownloading = true;
+                                                    try
+                                                    {
+                                                        notifyIcon1.Text = "Baixando: " + templ.ToString().Split('/')[templ.ToString().Split('/').Length - 1];
+                                                    }
+                                                    catch
+                                                    {
+
+                                                    }
+
+                                                    using (var file = dbx.Files.DownloadAsync(templ).Result)
+                                                    {
+                                                        using (var files = await file.GetContentAsStreamAsync())
+                                                        {
+
+                                                            string secondary = destpath.Replace("/" + destpath.Split('/')[destpath.Split('/').Length - 1], "");
+                                                            Console.WriteLine("novo path" + secondary);
+                                                            if (!System.IO.Directory.Exists(destpath))
+                                                            {
+                                                                Console.WriteLine("path de destino " + destpath + " secondario " + secondary);
+                                                                System.IO.Directory.CreateDirectory(secondary);
+                                                            }
+                                                            using (FileStream fileStream = System.IO.File.Create(destpath))
+                                                            {
+                                                                files.CopyTo(fileStream);
+                                                                Console.WriteLine("download concluido " + fileStream.Length + "  " + data.AsFile.Size);
+                                                                if ((ulong)fileStream.Length != data.AsFile.Size)
+                                                                {
+                                                                    // i--;                                                        Console.WriteLine("Replay");
+                                                                    //   continue;
+                                                                }
+                                                                Console.WriteLine("total memory antes" + GC.GetTotalMemory(true));
+
+                                                                files.Close();
+                                                                fileStream.Close();
+                                                                file.Dispose();
+                                                                files.Dispose();
+                                                                fileStream.Dispose();
+                                                                GC.Collect();
+                                                                GC.WaitForPendingFinalizers();
+                                                                GC.Collect();
+                                                                GC.WaitForPendingFinalizers();
+
+                                                            }
+                                                            notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Procurando.GetHicon());
+                                                            isdownloading = false;
+                                                            Console.WriteLine("total memory dps" + GC.GetTotalMemory(true));
+
+                                                        }
+                                                    }
+                                                }
+                                                else Console.WriteLine("Pulou");
+                                                break;
+                                            }
+
+                                            //else Console.WriteLine("NO download " + templ);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Console.WriteLine(ex.Message + " " + ex.Message.Contains("too_many"));
+                                            StreamWriter sw = new StreamWriter(Path.Combine(Path.GetTempPath(), "proartelog.txt"), true);
+                                            sw.Write(DateTime.Now + "- " + ex.Message + " Arquivo: " + "/" + lista[i]["origem"].ToString().Replace("%dia%", now.Day > 9 ? now.Day.ToString() : "0" + now.Day).Replace("%mes%", now.Month > 9 ? now.Month.ToString() : "0" + now.Month).Replace("%ano%", now.Year.ToString()) + sw.NewLine);
+                                            sw.Close();
+                                            if (ex.Message.Contains("too_many"))
+                                            {
+                                                i--;
+                                                now = DateTime.Now;
+                                                notifyIcon1.Text = string.Format("Aguardando autenticação segura às ({0}:{1}).", now.Hour, now.Minute);
+                                                freezed = true;
+                                                gambicont++;
+                                                await Task.Delay(330000);
+                                                gambicont++;
+                                                freezed = false;
+                                            }
+                                            else if(ex.Message.Contains("GDI+"))
+                                            {
+                                                //Process.GetCurrentProcess().Kill();
+                                            }
+                                        }
+                                        }
                                 }
                             }
                             catch (Exception ex)
                             {
-                                Console.WriteLine(ex.ToString());
+                                Console.WriteLine(ex.Message+" " + ex.Message.Contains("too_many"));
+                                StreamWriter sw = new StreamWriter(Path.Combine(Path.GetTempPath(), "proartelog.txt"), true);
+                                sw.Write(DateTime.Now + "- " + ex.Message + " paths: " + paths[z] + sw.NewLine);
+                                sw.Close();
+                                if (ex.Message.Contains("too_many"))
+                                {
+                                    z--;
+                                    now = DateTime.Now;
+                                    notifyIcon1.Text = string.Format("Aguardando autenticação segura às ({0}:{1}).", now.Hour, now.Minute);
+                                    freezed = true;
+                                    gambicont++;
+                                    await Task.Delay(330000);
+                                    gambicont++;
+                                    freezed = false;
+                                }
+                                else if (ex.Message.Contains("GDI+"))
+                                {
+                                  //  Process.GetCurrentProcess().Kill();
+                                }
                             }
+                            gambicont++;
+                            //gambierros = 0;
 
 
-                            }
+                        }
                         lista = null;
                         JArray pastas = (JArray)jobject["pastas"];
                         for (int i = 0; i < pastas.Count; i++)
@@ -724,7 +887,7 @@ namespace DropDownloader
                                             Console.WriteLine("Data é igual a meta data ?" + data.Name+" "+  item.Name);
                                             destpath += item.Name;
                                             Console.WriteLine("destpath " + destpath);
-                                            DateTime now = DateTime.Now;
+                                            now = DateTime.Now;
                                             if (System.IO.File.Exists(destpath))
                                             {
                                                 DateTime lastwrite = System.IO.File.GetLastWriteTime(destpath);
@@ -791,6 +954,21 @@ namespace DropDownloader
                                 StreamWriter sw = new StreamWriter(Path.Combine(Path.GetTempPath(), "proartelog.txt"), true);
                                 sw.Write(DateTime.Now + "- " + ex.Message + " Pasta: " + pastas[i]["origem"]+sw.NewLine);
                                 sw.Close();
+                                if(ex.Message.Contains("too_many"))
+                                {
+                                    i--;
+                                    now = DateTime.Now;
+                                    notifyIcon1.Text = string.Format("Aguardando autenticação segura às ({0}:{1}).", now.Hour, now.Minute);
+                                    freezed = true;
+                                    gambicont++;
+                                    await Task.Delay(330000);
+                                    gambicont++;
+                                    freezed = false;
+                                }
+                                else if (ex.Message.Contains("GDI+"))
+                                {
+                                   // Process.GetCurrentProcess().Kill();
+                                }
 
                             }
 
@@ -851,7 +1029,7 @@ namespace DropDownloader
                 GC.WaitForPendingFinalizers();
             gambicont++;
             updatecont++;
-            await Task.Delay(500);
+           // await Task.Delay(500);
             //if//(updatecont>10)
            // {
 ///Process.GetCurrentProcess().Kill();
@@ -1439,7 +1617,7 @@ namespace DropDownloader
                 {
                     gambierros++;
                 }
-                if (gambierros > 20&&!filessync)
+                if (gambierros > 20&&!filessync&&!freezed)
                 {
                     Process.GetCurrentProcess().Kill();
                 }
