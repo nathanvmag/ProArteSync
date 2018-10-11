@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime;
 using System.Runtime.CompilerServices;
@@ -19,7 +20,12 @@ namespace DropDownloader
         static void Main()
         {
             f1 mainForm = null;
-
+            try { int.Parse("dsaj");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Linha do  erro "+WinApi.GetLineNumber(ex));
+            }
             try
             {
                 WinApi.RefreshTrayArea();
@@ -62,6 +68,10 @@ namespace DropDownloader
             }
             catch(Exception ex)
             {
+                StreamWriter sw = new StreamWriter(Path.Combine(Path.GetTempPath(), "proartelog.txt"), true);
+                sw.Write(DateTime.Now + "- " + ex.ToString());
+                sw.Write("FECHADO POR ERRO DESCONHECIDO");
+                sw.Close();
 
                 Process.GetCurrentProcess().Kill();
                 if (mainForm!=null)
@@ -74,7 +84,10 @@ namespace DropDownloader
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             //DialogResult dr = MessageBox.Show("Error " + e.ExceptionObject.ToString(), "Erro", MessageBoxButtons.OK);
-
+            StreamWriter sw = new StreamWriter(Path.Combine(Path.GetTempPath(), "proartelog.txt"), true);
+            sw.Write(DateTime.Now + "- " + e.ExceptionObject.ToString());
+            sw.Write("FECHADO POR ERRO DESCONHECIDO");
+            sw.Close();
             Console.WriteLine("tive esse erro "+e.ExceptionObject.ToString());
             Process.GetCurrentProcess().Kill();
             Application.ExitThread();
@@ -83,8 +96,11 @@ namespace DropDownloader
          
         private static void ThreadHandler(object sender, ThreadExceptionEventArgs e)
         {
-           // DialogResult dr = MessageBox.Show("Error " + e.Exception.ToString(), "Erro", MessageBoxButtons.OK);
-
+            // DialogResult dr = MessageBox.Show("Error " + e.Exception.ToString(), "Erro", MessageBoxButtons.OK);
+            StreamWriter sw = new StreamWriter(Path.Combine(Path.GetTempPath(), "proartelog.txt"), true);
+            sw.Write(DateTime.Now + "- " + e.Exception.ToString());
+            sw.Write("FECHADO POR ERRO DESCONHECIDO");
+            sw.Close();
             Console.WriteLine("tive esse erro "+e.Exception.ToString());
             Process.GetCurrentProcess().Kill();
             Application.ExitThread();

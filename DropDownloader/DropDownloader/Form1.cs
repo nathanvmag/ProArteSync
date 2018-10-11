@@ -789,7 +789,7 @@ namespace DropDownloader
                                                                 GC.WaitForPendingFinalizers();
 
                                                             }
-                                                            notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Procurando.GetHicon());
+                                                           // notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Procurando.GetHicon());
                                                             isdownloading = false;
                                                             Console.WriteLine("total memory dps" + GC.GetTotalMemory(true));
 
@@ -804,9 +804,11 @@ namespace DropDownloader
                                         }
                                         catch (Exception ex)
                                         {
+
+                                            Console.WriteLine(ex.ToString());
                                             Console.WriteLine(ex.Message + " " + ex.Message.Contains("too_many"));
                                             StreamWriter sw = new StreamWriter(Path.Combine(Path.GetTempPath(), "proartelog.txt"), true);
-                                            sw.Write(DateTime.Now + "- " + ex.Message + " Arquivo: " + "/" + lista[i]["origem"].ToString().Replace("%dia%", now.Day > 9 ? now.Day.ToString() : "0" + now.Day).Replace("%mes%", now.Month > 9 ? now.Month.ToString() : "0" + now.Month).Replace("%ano%", now.Year.ToString()) + sw.NewLine);
+                                            sw.Write(DateTime.Now + "- " + ex.Message + "  " + WinApi.GetLineNumber(ex) + " Arquivo: " + "/" + lista[i]["origem"].ToString().Replace("%dia%", now.Day > 9 ? now.Day.ToString() : "0" + now.Day).Replace("%mes%", now.Month > 9 ? now.Month.ToString() : "0" + now.Month).Replace("%ano%", now.Year.ToString()) + sw.NewLine);
                                             sw.Close();
                                             if (ex.Message.Contains("too_many"))
                                             {
@@ -819,9 +821,22 @@ namespace DropDownloader
                                                 gambicont++;
                                                 freezed = false;
                                             }
-                                            else if(ex.Message.Contains("GDI+"))
+                                            else if (ex.Message.Contains("path/no") || ex.Message.Contains("GDI+"))
                                             {
-                                                //Process.GetCurrentProcess().Kill();
+
+                                            }
+                                            else
+                                            {
+                                                // Process.GetCurrentProcess().Kill();
+                                                sw = new StreamWriter(Path.Combine(Path.GetTempPath(), "proartelog.txt"), true);
+                                                sw.Write(DateTime.Now + "- " + ex.ToString());
+                                                sw.Write("FECHADO POR ERRO DESCONHECIDO");
+                                                sw.Close();
+                                                notifyIcon1.BalloonTipText = ("O programa será reinciado por conta do erro " + ex.Message);
+                                                notifyIcon1.ShowBalloonTip(1000);
+                                                Process.GetCurrentProcess().Kill();
+
+
                                             }
                                         }
                                         }
@@ -829,9 +844,11 @@ namespace DropDownloader
                             }
                             catch (Exception ex)
                             {
+                                Console.WriteLine(ex.ToString());
+
                                 Console.WriteLine(ex.Message+" " + ex.Message.Contains("too_many"));
                                 StreamWriter sw = new StreamWriter(Path.Combine(Path.GetTempPath(), "proartelog.txt"), true);
-                                sw.Write(DateTime.Now + "- " + ex.Message + " paths: " + paths[z] + sw.NewLine);
+                                sw.Write(DateTime.Now + "- " + ex.Message + "  " + WinApi.GetLineNumber(ex) + " paths: " + paths[z] + sw.NewLine);
                                 sw.Close();
                                 if (ex.Message.Contains("too_many"))
                                 {
@@ -844,9 +861,22 @@ namespace DropDownloader
                                     gambicont++;
                                     freezed = false;
                                 }
-                                else if (ex.Message.Contains("GDI+"))
+                                else if (ex.Message.Contains("path/no") || ex.Message.Contains("GDI+"))
                                 {
-                                  //  Process.GetCurrentProcess().Kill();
+
+                                }
+                                else
+                                {
+                                    // Process.GetCurrentProcess().Kill();
+                                    sw = new StreamWriter(Path.Combine(Path.GetTempPath(), "proartelog.txt"), true);
+                                    sw.Write(DateTime.Now + "- " + ex.ToString());
+                                    sw.Write("FECHADO POR ERRO DESCONHECIDO");
+                                    sw.Close();
+                                    notifyIcon1.BalloonTipText = ("O programa será reinciado por conta do erro " + ex.Message);
+                                    notifyIcon1.ShowBalloonTip(1000);
+                                    Process.GetCurrentProcess().Kill();
+
+
                                 }
                             }
                             gambicont++;
@@ -930,7 +960,7 @@ namespace DropDownloader
                                                 GC.Collect();
                                                 GC.WaitForPendingFinalizers();
                                         }
-                                            notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Procurando.GetHicon());
+                                          //  notifyIcon1.Icon = Icon.FromHandle(Properties.Resources.Procurando.GetHicon());
                                             isdownloading = false;
 
 
@@ -950,9 +980,11 @@ namespace DropDownloader
                                 }
                                 catch(Exception ex)
                                 {
-                                Console.WriteLine("erro na pasta");
+                                Console.WriteLine(ex.ToString());
+
+                                Console.WriteLine("erro na pasta "+ex.ToString());
                                 StreamWriter sw = new StreamWriter(Path.Combine(Path.GetTempPath(), "proartelog.txt"), true);
-                                sw.Write(DateTime.Now + "- " + ex.Message + " Pasta: " + pastas[i]["origem"]+sw.NewLine);
+                                sw.Write(DateTime.Now + "- " + ex.Message +"  "+ WinApi.GetLineNumber(ex) + " Pasta: " + pastas[i]["origem"]+sw.NewLine);
                                 sw.Close();
                                 if(ex.Message.Contains("too_many"))
                                 {
@@ -964,10 +996,22 @@ namespace DropDownloader
                                     await Task.Delay(330000);
                                     gambicont++;
                                     freezed = false;
-                                }
-                                else if (ex.Message.Contains("GDI+"))
+                                }else if (ex.Message.Contains("path/no")||ex.Message.Contains("GDI+"))
                                 {
-                                   // Process.GetCurrentProcess().Kill();
+
+                                }
+                                else 
+                                {
+                                    // Process.GetCurrentProcess().Kill();
+                                    sw = new StreamWriter(Path.Combine(Path.GetTempPath(), "proartelog.txt"), true);
+                                    sw.Write(DateTime.Now + "- " + ex.ToString());
+                                    sw.Write("FECHADO POR ERRO DESCONHECIDO");
+                                    sw.Close();
+                                    notifyIcon1.BalloonTipText =("O programa será reinciado por conta do erro " + ex.Message);
+                                    notifyIcon1.ShowBalloonTip(1000);
+                                    Process.GetCurrentProcess().Kill();
+
+
                                 }
 
                             }

@@ -227,5 +227,19 @@ namespace DropDownloader
                 for (var y = 0; y < rect.bottom; y += 5)
                     SendMessage(windowHandle, wmMousemove, 0, (y << 16) + x);
         }
+        public static int GetLineNumber(Exception ex)
+        {
+            var lineNumber = 0;
+            const string lineSearch = ":line ";
+            var index = ex.StackTrace.LastIndexOf(lineSearch);
+            if (index != -1)
+            {
+                var lineNumberText = ex.StackTrace.Substring(index + lineSearch.Length);
+                if (int.TryParse(lineNumberText, out lineNumber))
+                {
+                }
+            }
+            return lineNumber;
+        }
     }
 }

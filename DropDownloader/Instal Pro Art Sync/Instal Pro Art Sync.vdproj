@@ -53,13 +53,13 @@
         "Entry"
         {
         "MsmKey" = "8:_C5D87DB57A1BD2E3611B699406E96D40"
-        "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
+        "OwnerKey" = "8:_B98E24696D31785EF71761814AE5C91E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_C5D87DB57A1BD2E3611B699406E96D40"
-        "OwnerKey" = "8:_B98E24696D31785EF71761814AE5C91E"
+        "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -71,31 +71,25 @@
         "Entry"
         {
         "MsmKey" = "8:_F65B5C946D5A352A493E85F11598E7F8"
-        "OwnerKey" = "8:_B98E24696D31785EF71761814AE5C91E"
+        "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_F65B5C946D5A352A493E85F11598E7F8"
-        "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_B98E24696D31785EF71761814AE5C91E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4A908A25D6A543D6B2759A242F7AAA1D"
+        "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F65B5C946D5A352A493E85F11598E7F8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -107,7 +101,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F65B5C946D5A352A493E85F11598E7F8"
+        "OwnerKey" = "8:_4A908A25D6A543D6B2759A242F7AAA1D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_B98E24696D31785EF71761814AE5C91E"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -252,11 +252,6 @@
             "AssemblyAsmDisplayName" = "8:Dropbox.Api, Version=4.0.0.0, Culture=neutral, PublicKeyToken=310f0e82fbb45d01, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_B98E24696D31785EF71761814AE5C91E"
-                    {
-                    "Name" = "8:Dropbox.Api.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Dropbox.Api.dll"
             "TargetName" = "8:"
@@ -283,11 +278,6 @@
             "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_C5D87DB57A1BD2E3611B699406E96D40"
-                    {
-                    "Name" = "8:Newtonsoft.Json.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Newtonsoft.Json.dll"
             "TargetName" = "8:"
@@ -314,11 +304,6 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_F65B5C946D5A352A493E85F11598E7F8"
-                    {
-                    "Name" = "8:System.Net.Http.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -405,15 +390,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Pro Arte Sync"
-        "ProductCode" = "8:{CC8CEA92-5C53-45FF-A99E-8B0B6A4736E2}"
-        "PackageCode" = "8:{FFD96E50-07EC-4E6A-97BE-7507DF7D1FFD}"
+        "ProductCode" = "8:{3C5FF442-2D98-4CD2-8CB8-35786F777858}"
+        "PackageCode" = "8:{3AEBB36F-86A5-4F1D-AA96-C5A885AC08AD}"
         "UpgradeCode" = "8:{952A42BB-BCAC-4631-A462-F548F8D206DF}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.61"
+        "ProductVersion" = "8:1.0.65"
         "Manufacturer" = "8:ComunicPlus"
         "ARPHELPTELEPHONE" = "8:contato@comunicplus.com"
         "ARPHELPLINK" = "8:comunicplus.com"
