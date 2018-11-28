@@ -16,6 +16,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_2958D643BCF84F7A9D69CCB043200F50"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_4A908A25D6A543D6B2759A242F7AAA1D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -29,6 +35,12 @@
         "Entry"
         {
         "MsmKey" = "8:_69636A499F864CE085985DBE67077B72"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8AC43CBA4D71481BBE1A3EAAED54DCCE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -53,13 +65,19 @@
         "Entry"
         {
         "MsmKey" = "8:_C5D87DB57A1BD2E3611B699406E96D40"
-        "OwnerKey" = "8:_B98E24696D31785EF71761814AE5C91E"
+        "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_C5D87DB57A1BD2E3611B699406E96D40"
-        "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
+        "OwnerKey" = "8:_B98E24696D31785EF71761814AE5C91E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EB5ABC2B240E43269C88199742E3D6B6"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -71,25 +89,31 @@
         "Entry"
         {
         "MsmKey" = "8:_F65B5C946D5A352A493E85F11598E7F8"
-        "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
+        "OwnerKey" = "8:_B98E24696D31785EF71761814AE5C91E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_F65B5C946D5A352A493E85F11598E7F8"
+        "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_B98E24696D31785EF71761814AE5C91E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F65B5C946D5A352A493E85F11598E7F8"
+        "OwnerKey" = "8:_4A908A25D6A543D6B2759A242F7AAA1D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -101,13 +125,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4A908A25D6A543D6B2759A242F7AAA1D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B98E24696D31785EF71761814AE5C91E"
+        "OwnerKey" = "8:_F65B5C946D5A352A493E85F11598E7F8"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -205,6 +223,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2958D643BCF84F7A9D69CCB043200F50"
+            {
+            "SourcePath" = "8:..\\DropDownloader\\baixando.ico"
+            "TargetName" = "8:baixando.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_D70C8B2E2B4E4C95B6FE6EBF6149D4B7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_564ECD83B1FE4384964D4472CC22873A"
             {
             "SourcePath" = "8:..\\DropDownloader\\foldericon.ico"
@@ -229,6 +267,26 @@
             {
             "SourcePath" = "8:..\\icon.ico"
             "TargetName" = "8:icon.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_D70C8B2E2B4E4C95B6FE6EBF6149D4B7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:TRUE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8AC43CBA4D71481BBE1A3EAAED54DCCE"
+            {
+            "SourcePath" = "8:..\\DropDownloader\\procurando.ico"
+            "TargetName" = "8:procurando.ico"
             "Tag" = "8:"
             "Folder" = "8:_D70C8B2E2B4E4C95B6FE6EBF6149D4B7"
             "Condition" = "8:"
@@ -295,6 +353,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EB5ABC2B240E43269C88199742E3D6B6"
+            {
+            "SourcePath" = "8:..\\DropDownloader\\atualizado.ico"
+            "TargetName" = "8:atualizado.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_D70C8B2E2B4E4C95B6FE6EBF6149D4B7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F65B5C946D5A352A493E85F11598E7F8"
@@ -390,15 +468,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Pro Arte Sync"
-        "ProductCode" = "8:{3C5FF442-2D98-4CD2-8CB8-35786F777858}"
-        "PackageCode" = "8:{3AEBB36F-86A5-4F1D-AA96-C5A885AC08AD}"
+        "ProductCode" = "8:{37154781-DFC5-4302-802C-C94176C723EE}"
+        "PackageCode" = "8:{2D073FC6-5D68-48FA-A825-3BC784906BE6}"
         "UpgradeCode" = "8:{952A42BB-BCAC-4631-A462-F548F8D206DF}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.65"
+        "ProductVersion" = "8:1.0.72"
         "Manufacturer" = "8:ComunicPlus"
         "ARPHELPTELEPHONE" = "8:contato@comunicplus.com"
         "ARPHELPLINK" = "8:comunicplus.com"

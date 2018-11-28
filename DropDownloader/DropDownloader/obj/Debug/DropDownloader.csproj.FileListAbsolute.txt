@@ -77,3 +77,7 @@ D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\DropDownloader.csp
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.exe
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\Pro Arte Sync.pdb
 D:\GitHub\ProArteSync\DropDownloader\DropDownloader\obj\Debug\DropDownloader.csprojAssemblyReference.cache
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\atualizado.ico
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\baixando.ico
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\procurando.ico
+D:\GitHub\ProArteSync\DropDownloader\DropDownloader\bin\Debug\icon.ico

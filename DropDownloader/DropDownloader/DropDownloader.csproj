@@ -211,7 +211,9 @@
     <EmbeddedResource Include="Userinfos.resx">
       <DependentUpon>Userinfos.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="app.manifest">
       <SubType>Designer</SubType>
     </None>
@@ -235,10 +237,21 @@
     <None Include="Resources\Logomarca Conteúdo Pro Arte.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="atualizado.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="baixando.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="foldericon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="icon.ico" />
+    <Content Include="icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="procurando.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\folder.png" />
     <None Include="Resources\foldericon.bmp" />
     <None Include="Resources\Ícone.png" />
