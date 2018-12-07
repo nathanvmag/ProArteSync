@@ -65,13 +65,13 @@
         "Entry"
         {
         "MsmKey" = "8:_C5D87DB57A1BD2E3611B699406E96D40"
-        "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
+        "OwnerKey" = "8:_B98E24696D31785EF71761814AE5C91E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_C5D87DB57A1BD2E3611B699406E96D40"
-        "OwnerKey" = "8:_B98E24696D31785EF71761814AE5C91E"
+        "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -89,31 +89,25 @@
         "Entry"
         {
         "MsmKey" = "8:_F65B5C946D5A352A493E85F11598E7F8"
-        "OwnerKey" = "8:_B98E24696D31785EF71761814AE5C91E"
+        "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_F65B5C946D5A352A493E85F11598E7F8"
-        "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_B98E24696D31785EF71761814AE5C91E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4A908A25D6A543D6B2759A242F7AAA1D"
+        "OwnerKey" = "8:_AFD1D2499DEC45E7A54FB2CF251CF0A9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F65B5C946D5A352A493E85F11598E7F8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -125,7 +119,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F65B5C946D5A352A493E85F11598E7F8"
+        "OwnerKey" = "8:_4A908A25D6A543D6B2759A242F7AAA1D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_B98E24696D31785EF71761814AE5C91E"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -468,15 +468,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Pro Arte Sync"
-        "ProductCode" = "8:{37154781-DFC5-4302-802C-C94176C723EE}"
-        "PackageCode" = "8:{2D073FC6-5D68-48FA-A825-3BC784906BE6}"
+        "ProductCode" = "8:{B304F0BC-1F60-4FFF-B177-57DB56A2C055}"
+        "PackageCode" = "8:{EB4F3CC4-7280-4F49-808D-A912148F1D7C}"
         "UpgradeCode" = "8:{952A42BB-BCAC-4631-A462-F548F8D206DF}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.72"
+        "ProductVersion" = "8:1.0.73"
         "Manufacturer" = "8:ComunicPlus"
         "ARPHELPTELEPHONE" = "8:contato@comunicplus.com"
         "ARPHELPLINK" = "8:comunicplus.com"

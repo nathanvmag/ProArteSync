@@ -26,8 +26,10 @@ namespace fix
             Console.WriteLine("MEU NOME " + Process.GetCurrentProcess().ProcessName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.ShowInTaskbar = false;
+            SetStartup();
             this.Load += new EventHandler(Form1_Load);
         }
+       
 
         void Form1_Load(object sender, EventArgs e)
         {
